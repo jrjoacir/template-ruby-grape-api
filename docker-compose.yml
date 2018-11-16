@@ -1,0 +1,14 @@
+version: '3'
+services:
+  database:
+    build:
+      context: ./database/config/docker
+      dockerfile: Dockerfile
+    ports:
+      - "5432:5432"
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
