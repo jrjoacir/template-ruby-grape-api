@@ -1,0 +1,17 @@
+version: '3'
+services:
+  database:
+    build:
+      context: ./docker/database
+      dockerfile: Dockerfile
+    ports:
+      - "5432:5432"
+  app:
+    build:
+      context: .
+      dockerfile: ./docker/app/Dockerfile
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/usr/src/app
+    entrypoint: bundle install
