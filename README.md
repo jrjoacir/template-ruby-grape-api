@@ -16,7 +16,9 @@ Ruby 2.5 (Container Docker)
     - Dockerfile got on official Postgresql Dockerfile (https://hub.docker.com/_/ruby/)
     - Build Docker Container with a good name: docker build -t ruby:container-smasher .
     - Execute container (execute bundle install): docker run ruby:container-smasher bundle install
-    **** - Execute commandas inside container (execute IRB): docker exec --name ruby:container-smasher irb
+    **** - Execute commandas inside container (execute IRB):
+        - docker exec --name ruby:container-smasher irb
+        - docker-compose run --rm app irb
 
 Importante links:
 - Docker
