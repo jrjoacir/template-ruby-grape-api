@@ -7,6 +7,10 @@ class API < Grape::API
   namespace :healthcheck do
     mount Endpoints::V1::Healthcheck
   end
+
+  namespace :app do
+    mount Endpoints::V1::App
+  end
 end
 
 puts '**** Routes API ****'
