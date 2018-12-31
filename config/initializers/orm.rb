@@ -9,11 +9,10 @@ module ORM
         @db ||= Sequel.connect(config)
       end
 
-      #def migrate(version = nil)
-      #  version = version.to_i if version
-      #  Sequel.extension :migration
-      #  Sequel::Migrator.run(db, dir_migrations, target: version)
-      #end
+      def migrate
+        Sequel.extension :migration
+        Sequel::Migrator.run(db, dir_migrations, target: nil)
+      end
 
       private
 
@@ -33,9 +32,9 @@ module ORM
         { logger: Logger.new(file_name) }
       end
 
-      #def dir_migrations
-      #  'db/migrations'
-      #end
+      def dir_migrations
+        'db/migrations'
+      end
     end
   end
 end
