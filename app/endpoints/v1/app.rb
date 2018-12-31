@@ -31,6 +31,12 @@ module Endpoints
         app = Services::App::Update.execute(id, params)
         present app, with: Endpoints::Entities::App
       end
+
+      desc 'Delete an application'
+      delete ':id' do
+        Services::App::Delete.execute(params[:id])
+        body false
+      end
     end
   end
 end

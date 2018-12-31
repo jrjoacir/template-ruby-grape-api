@@ -1,19 +1,19 @@
 module Services
   module App
-    class Get
-      include Validators::App::Get
+    class Delete
+      include Validators::App::Delete
 
       def initialize(app)
         self.app = app
       end
 
-      def self.execute
-        new(Models::App.first).execute
+      def self.execute(id)
+        new(Models::App[id]).execute
       end
 
       def execute
         validate!
-        app
+        app.delete
       end
 
       private
