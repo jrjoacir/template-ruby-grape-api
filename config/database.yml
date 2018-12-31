@@ -1,0 +1,17 @@
+development:
+  adapter: postgres
+  user: <%= ENV['DB_USER'] %>
+  password: <%= ENV['DB_PASSWORD'] %>
+  host: <%= ENV['DB_HOST'] %>
+  database: <%= ENV['DATABASE'] %>
+  port: <%= ENV['DB_PORT'] %>
+  max_connections: <%= ENV['DB_MAX_CONNECTION'] %>
+
+test:
+  adapter: postgres
+  user: <%= ENV['DB_USER'] %>
+  password: <%= ENV['DB_PASSWORD'] %>
+  host: <%= ENV['DB_HOST'] %>
+  database: <%= ENV['DATABASE'] %>
+  port: <%= ENV['DB_PORT'] %>
+  max_connections: <%= ENV['DB_MAX_CONNECTION'] %>

@@ -1,0 +1,4 @@
+# Logfile created on 2018-12-31 00:13:42 +0000 by logger.rb/61378
+I, [2018-12-31T00:13:42.830127 #1150]  INFO -- : (0.000320s) SET standard_conforming_strings = ON
+I, [2018-12-31T00:13:42.830439 #1150]  INFO -- : (0.000150s) SET client_min_messages = 'WARNING'
+I, [2018-12-31T00:13:42.830652 #1150]  INFO -- : (0.000136s) SET DateStyle = 'ISO'

@@ -1,4 +1,4 @@
-require_relative "config/environments/#{ENV['RACK_ENV']}"
+require_relative "application"
 
 class API < Grape::API
   format :json

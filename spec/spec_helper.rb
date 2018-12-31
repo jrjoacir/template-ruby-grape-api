@@ -14,7 +14,7 @@
 #
 
 ENV['RACK_ENV'] ||= 'test'
-require_relative "../config/environments/#{ENV['RACK_ENV']}"
+require_relative "../application"
 
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 RSpec.configure do |config|
