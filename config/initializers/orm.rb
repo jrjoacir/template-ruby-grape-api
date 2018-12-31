@@ -9,9 +9,9 @@ module ORM
         @db ||= Sequel.connect(config)
       end
 
-      def migrate
+      def migrate(version = nil)
         Sequel.extension :migration
-        Sequel::Migrator.run(db, dir_migrations, target: nil)
+        Sequel::Migrator.run(db, dir_migrations, target: version)
       end
 
       private

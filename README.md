@@ -24,3 +24,5 @@ Importante links:
 - Docker
     - https://hub.docker.com/_/postgres/
     - http://flaviosilveira.com/2017/criando-seu-container-com-dockerfile/
+
+Execute migration: docker-compose exec app rake db:migrate RACK_ENV=development
