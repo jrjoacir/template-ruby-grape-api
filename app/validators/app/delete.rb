@@ -1,8 +1,10 @@
 module Validators
   module App
     module Delete
+      include Validators::App
+
       def validate!
-        raise StandardError, 'App does not exist' unless app
+        not_found!
       end
     end
   end
