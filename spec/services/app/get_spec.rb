@@ -11,8 +11,10 @@ RSpec.describe Services::App::Get do
     end
 
     context 'when is invalid' do
-      it 'raise Errors::Business::NotFound' do
-        expect{subject}.to raise_error(Errors::Business::NotFound, 'App does not exist')
+      context 'when app notfound' do
+        it 'raise Errors::Business::NotFound' do
+          expect{subject}.to raise_error(Errors::Business::NotFound, 'App does not exist')
+        end
       end
     end
   end
