@@ -8,6 +8,10 @@ RSpec.describe Services::App::Create do
         expect(subject).to be_an Models::App
         expect(subject.id).to be_an Integer
       end
+
+      it 'create app in database' do
+        expect(subject).to eq Models::App.last
+      end
     end
 
     context 'when is invalid' do
