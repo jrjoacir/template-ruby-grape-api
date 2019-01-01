@@ -7,6 +7,7 @@ RSpec.describe Services::App::Get do
 
       it 'return an app model' do
         expect(subject).to be_an Models::App
+        expect(subject.id).to be_an Integer
       end
     end
 
