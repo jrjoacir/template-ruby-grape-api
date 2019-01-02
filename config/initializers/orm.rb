@@ -40,5 +40,3 @@ module ORM
 end
 
 ORM::Database.connect(ENV['RACK_ENV'])
-# migration execution via terminal: sequel -m db/migrations sqlite://podcast_dev.db
-# make migration via Rake.

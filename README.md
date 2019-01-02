@@ -5,7 +5,27 @@
 - [Docker](https://docs.docker.com/install/)
 - [Docker Compose](https://docs.docker.com/compose/install/)
 
-Stack
+## Directory structure
+
+- **app** -> Main API Directory. Where is contained all API logic.
+  - **endpoints** -> Processing logic of endpoints
+    - **entities** -> Presentation logic of Endpoints data result. Each resource has an Entity representation.
+    - **v1** -> Endpoints logical construction (version 1). Each resource has a directory and each http method (get, post, put, delete, etc) has a file.
+  - **errors** -> Has error classes customized.
+  - **models** -> Keep model classes bound or not with database tables.
+  - **services** -> Contains every business logic for each operation. Each resource has a directory and each operation (get, create, update, delete) has a file.
+  - **validators** -> Contains validators classes or modules used to services. Each resource has a directory and each operation has a file.
+- **config** -> Contains application configuration files.
+  - **environments** -> Each environment (test, development, production) is represented by a configuration file. Each file contains specific configuration for each environment.
+  - **initializers** -> Has files that need to be load in the application initialization.
+- **db** -> Contains files associated to database execution using or not an ORM.
+  - **migrations** -> Contains Sequel ORM migrations files.
+- **docker** -> Has docker configuration files.
+  - **app** -> Contains docker configuration files for application container.
+  - **database** -> Contains docker configuration files for database container.
+- **spec** -> Coming soon!
+
+## Stack
 
 Postgresql 11 (Container Docker)
     - Dockerfile got on official Postgresql Dockerfile (https://hub.docker.com/_/postgres/)
