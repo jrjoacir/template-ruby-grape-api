@@ -1,4 +1,4 @@
-RSpec.describe Endpoints::V1::App do
+RSpec.describe Endpoints::V1::App::Get do
   context '#get' do
     subject { get('v1/app') }
 

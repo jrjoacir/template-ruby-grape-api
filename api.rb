@@ -15,6 +15,9 @@ class API < Grape::API
   end
 
   namespace :app do
-    mount Endpoints::V1::App
+    mount Endpoints::V1::App::Post
+    mount Endpoints::V1::App::Delete
+    mount Endpoints::V1::App::Put
+    mount Endpoints::V1::App::Get
   end
 end
