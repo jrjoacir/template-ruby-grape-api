@@ -8,7 +8,7 @@ RSpec.describe Endpoints::V1::App::Delete do
       expect(last_response.status).to eq 204
     end
 
-    it 'return app response body' do
+    it 'return empty response body' do
       expect(last_response.body).to be_empty
     end
   end
