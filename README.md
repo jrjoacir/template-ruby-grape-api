@@ -5,6 +5,14 @@
 - [Docker](https://docs.docker.com/install/)
 - [Docker Compose](https://docs.docker.com/compose/install/)
 
+## Stack
+
+- Database -> [Postgresql 11](https://www.postgresql.org/)
+- Language -> [Ruby 2.5.3](http://ruby-doc.org/core-2.5.3/)
+  - API Framework -> [Grape](https://github.com/ruby-grape/grape)
+  - Web Server -> [Puma](http://puma.io/)
+  - Database ORM -> [Sequel](https://github.com/jeremyevans/sequel)
+
 ## Directory structure
 
 - **app** -> Main API Directory. Where is contained all API logic.
@@ -23,17 +31,22 @@
 - **docker** -> Has docker configuration files.
   - **app** -> Contains docker configuration files for application container.
   - **database** -> Contains docker configuration files for database container.
-- **spec** -> Coming soon!
+- **spec** -> Has all tests, classes and modules for support tests, factories, everything about tests. Each written test has to follow their directory structure.
+  - **factories** -> Keeps every factories class (we are using [FactoryBot](https://github.com/thoughtbot/factory_bot)).
+  - **support** -> Has every need to help test classes.
+  - **endpoints** -> Contains tests for Endpoints.
+  - **models** -> Contains tests for Models.
+  - **services** -> Contains tests for Services.
 
-## Stack
+## Additional information (Draft)
 
-Postgresql 11 (Container Docker)
+- Postgresql 11 (Container Docker)
     - Dockerfile got on official Postgresql Dockerfile (https://hub.docker.com/_/postgres/)
     - Build Docker Container with a good name: docker build -t postgresql:container-smasher ./database/config/docker
     - Execute container (connect in database): docker run postgres:latest -e POSTGRES_PASSWORD=mysecretpassword -d postgres
     **** - Execute commands inside container (connect in database): docker exec --name container-smasher -e POSTGRES_PASSWORD=mysecretpassword -d postgres
 
-Ruby 2.5 (Container Docker)
+- Ruby 2.5 (Container Docker)
     - Dockerfile got on official Postgresql Dockerfile (https://hub.docker.com/_/ruby/)
     - Build Docker Container with a good name: docker build -t ruby:container-smasher .
     - Execute container (execute bundle install): docker run ruby:container-smasher bundle install
@@ -41,9 +54,11 @@ Ruby 2.5 (Container Docker)
         - docker exec --name ruby:container-smasher irb
         - docker-compose run --rm app irb
 
-Importante links:
-- Docker
-    - https://hub.docker.com/_/postgres/
-    - http://flaviosilveira.com/2017/criando-seu-container-com-dockerfile/
+- Execute migration: docker-compose exec app rake db:migrate RACK_ENV=development
 
-Execute migration: docker-compose exec app rake db:migrate RACK_ENV=development
+- Importante links:
+  - Docker
+      - https://hub.docker.com/_/postgres/
+      - http://flaviosilveira.com/2017/criando-seu-container-com-dockerfile/
+
+  
