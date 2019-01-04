@@ -1,6 +1,6 @@
 # TODO: Create a task for create and drop database
-
 ENV['RACK_ENV'] ||= 'development'
+
 require_relative 'application'
 
 namespace :db do

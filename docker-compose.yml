@@ -10,10 +10,12 @@ services:
     build:
       context: .
       dockerfile: ./docker/app/Dockerfile
+    depends_on:
+      - database
     expose:
       - "3000"
     ports:
       - "3000:3000"
     volumes:
       - .:/usr/src/app
-    command: 'puma -p 3000'
+    entrypoint: 'sh ./docker/app/entrypoint.sh'

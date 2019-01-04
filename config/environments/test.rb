@@ -1,2 +1,1 @@
-require_gems 'byebug', 'factory_bot', 'rack/test'
-require_dirs 'spec/factories', 'spec/support'
+require_gems 'rspec', 'byebug', 'factory_bot', 'rack/test'

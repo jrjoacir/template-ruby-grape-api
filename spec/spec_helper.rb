@@ -17,6 +17,8 @@ ENV['RACK_ENV'] ||= 'test'
 
 require_relative '../config/simplecov'
 require_relative "../application"
+require_dirs 'app', 'spec/factories', 'spec/support'
+require_file 'api'
 
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 RSpec.configure do |config|
