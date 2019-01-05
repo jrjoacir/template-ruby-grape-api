@@ -2,7 +2,6 @@ module Models
   class Healthcheck
     attr_reader :date_time, :services
 
-    # TODO: services must be an array!
     def initialize(services)
       self.date_time = Time.now
       self.services = services
