@@ -9,6 +9,7 @@ SimpleCov.start do
   add_group 'Errors', 'app/errors'
   add_group 'Models', 'app/models'
   add_group 'Services', 'app/services'
+  add_group 'Commands', 'app/commands'
   add_group 'Validators', 'app/validators'
 
   minimum_coverage 100
