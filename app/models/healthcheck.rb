@@ -1,14 +1,14 @@
 module Models
   class Healthcheck
-    attr_reader :status, :date_time
+    attr_reader :date_time, :services
 
-    def initialize
+    def initialize(services)
       self.date_time = Time.now
-      self.status = 'OK'
+      self.services = services
     end
 
     private
 
-    attr_writer :status, :date_time
+    attr_writer :date_time, :services
   end
 end

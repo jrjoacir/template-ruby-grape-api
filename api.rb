@@ -11,7 +11,7 @@ class API < Grape::API
   end
 
   namespace :healthcheck do
-    mount Endpoints::V1::Healthcheck
+    mount Endpoints::V1::Healthcheck::Get
   end
 
   namespace :app do
