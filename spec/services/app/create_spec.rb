@@ -17,9 +17,11 @@ RSpec.describe Services::App::Create do
     context 'when is invalid' do
       context 'when app already exists' do
         before { FactoryBot.create(:app) }
+        let(:error) { Errors::Business::AlreadyExist }
+        let(:error_message) { 'App already exists' }
 
         it 'raise Errors::Business::AlreadyExist' do
-          expect{subject}.to raise_error(Errors::Business::AlreadyExist, 'App already exists')
+          expect { subject }.to raise_error(error, error_message)
         end
       end
     end

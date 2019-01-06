@@ -1,6 +1,7 @@
 RSpec.describe Services::Healthcheck::Get do
   before do
-    expect(Commands::GetStatusDatabase).to receive(:execute).and_return(service_status)
+    expect(Commands::GetStatusDatabase).to receive(:execute)
+      .and_return(service_status)
   end
 
   subject { Services::Healthcheck::Get.execute }

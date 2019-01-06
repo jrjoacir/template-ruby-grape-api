@@ -1,11 +1,21 @@
 module Validators
   module App
     def already_exist!
-      raise Errors::Business::AlreadyExist, 'App already exists' if Models::App.first
+      already_exist_error if Models::App.first
     end
 
     def not_found!
-      raise Errors::Business::NotFound, 'App does not exist' unless app
+      not_found_error unless app
+    end
+
+    private
+
+    def already_exist_error
+      raise Errors::Business::AlreadyExist, 'App already exists'
+    end
+
+    def not_found_error
+      raise Errors::Business::NotFound, 'App does not exist'
     end
   end
 end

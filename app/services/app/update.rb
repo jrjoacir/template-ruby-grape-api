@@ -17,6 +17,7 @@ module Services
         validate!
         app_updated = app.update(params)
         return app unless app_updated
+
         app_updated
       end
 

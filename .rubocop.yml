@@ -1,0 +1,13 @@
+Style/AsciiComments:
+  Enabled: false
+
+Style/Documentation:
+  Enabled: false
+
+Metrics/BlockLength:
+  Exclude:
+    - 'spec/**/*'
+
+AllCops:   
+  Exclude:     
+    - 'spec/spec_helper.rb'

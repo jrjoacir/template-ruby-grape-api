@@ -7,7 +7,7 @@ module Endpoints
           requires :name, type: String, desc: 'Name'
           requires :description, type: String, desc: 'Description'
         end
-  
+
         put ':id' do
           id = params[:id]
           params.slice!(:name, :description)

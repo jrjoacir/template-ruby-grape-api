@@ -4,7 +4,7 @@ RSpec.describe Endpoints::V1::App::Put do
 
   context 'when exist an app' do
     let(:id) { FactoryBot.create(:app).id }
-    let(:response_body) { {id: id}.merge(params).to_hash.to_json }
+    let(:response_body) { { id: id }.merge(params).to_hash.to_json }
 
     it 'return http status 200 - OK' do
       expect(last_response.status).to eq 200

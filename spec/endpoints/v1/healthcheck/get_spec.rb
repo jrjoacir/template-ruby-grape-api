@@ -1,7 +1,8 @@
 RSpec.describe Endpoints::V1::Healthcheck::Get do
   before do
-    expect(Commands::GetStatusDatabase).to receive(:execute).and_return(service_status)
-    get("v1/healthcheck")
+    expect(Commands::GetStatusDatabase).to receive(:execute)
+      .and_return(service_status)
+    get('v1/healthcheck')
   end
 
   let(:duration) { 1 }
