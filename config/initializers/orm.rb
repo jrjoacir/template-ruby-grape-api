@@ -1,12 +1,13 @@
 module ORM
   class Database
-    class << self
-      attr_reader :db
+    ENVIRONMENT = ENV['RACK_ENV']
+    DB_LOG_FILE = ENV['DB_LOG_FILE']
 
-      def connect(environment)
-        config = db_config(environment)
-        config.merge!(logger_config)
-        @db ||= Sequel.connect(config)
+    class << self
+      def db
+        @db ||= begin
+          connect(ENVIRONMENT)
+        end
       end
 
       def migrate(version = nil)
@@ -16,9 +17,15 @@ module ORM
 
       private
 
+      def connect(environment)
+        config = db_config(environment)
+        config.merge!(logger_config)
+        Sequel.connect(config)
+      end
+
       def db_config(environment)
         # what's difference betweem YAML.safe_load and YAML.load?
-        config = YAML.load(ERB.new(File.read(path_config_file)).result)
+        config = YAML.safe_load(ERB.new(File.read(path_config_file)).result)
         config[environment]
       end
 
@@ -27,7 +34,7 @@ module ORM
       end
 
       def logger_config
-        file_name = "logs/#{ENV['DB_LOG_FILE']}"
+        file_name = "logs/#{DB_LOG_FILE}"
         File.delete(file_name) if File.exist?(file_name)
         { logger: Logger.new(file_name) }
       end
@@ -39,4 +46,4 @@ module ORM
   end
 end
 
-ORM::Database.connect(ENV['RACK_ENV'])
+ORM::Database.db
