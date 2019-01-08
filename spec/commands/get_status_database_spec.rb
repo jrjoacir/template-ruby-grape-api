@@ -7,9 +7,20 @@ RSpec.describe Commands::GetStatusDatabase do
                                                .and_return(true)
     end
 
-    it 'return an instance of Models::ServiceStatus class with Status OK' do
+    it 'return an instance of Models::ServiceStatus class' do
       expect(subject).to be_an Models::ServiceStatus
+    end
+
+    it 'return duration > 0' do
+      expect(subject.duration).to be > 0
+    end
+
+    it 'return status OK' do
       expect(subject.status).to eq 'OK'
+    end
+
+    it 'return error nil' do
+      expect(subject.error).to be_nil
     end
   end
 
@@ -19,9 +30,20 @@ RSpec.describe Commands::GetStatusDatabase do
                                                .and_raise(StandardError)
     end
 
-    it 'return an instance of Models::ServiceStatus class with Status NOT_OK' do
+    it 'return an instance of Models::ServiceStatus class' do
       expect(subject).to be_an Models::ServiceStatus
+    end
+
+    it 'return duration > 0' do
+      expect(subject.duration).to be > 0
+    end
+
+    it 'return status NOT_OK' do
       expect(subject.status).to eq 'NOT_OK'
+    end
+
+    it 'return error StandardError' do
+      expect(subject.error).to eq StandardError
     end
   end
 end

@@ -5,16 +5,10 @@ module Commands
 
       begin
         ORM::Database.db.run('select 1')
-        status = 'OK'
-        error = nil
-      rescue => error
-        status = 'NOT_OK'
-        error = error.class
+        Models::ServiceStatus.new('OK', Time.now - start, nil)
+      rescue StandardError => error
+        Models::ServiceStatus.new('NOT_OK', Time.now - start, error.class)
       end
-
-      duration = Time.now - start
-
-      Models::ServiceStatus.new(status, duration, error)
     end
   end
 end
