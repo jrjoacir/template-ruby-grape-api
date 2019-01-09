@@ -13,14 +13,56 @@
   - Web Server -> [Puma](http://puma.io/)
   - Database ORM -> [Sequel](https://github.com/jeremyevans/sequel)
 
-## Directory structure
+## Development Usage
+
+### Building Containers
+
+This project uses two docker containers: a **database** and an **application** container. The application container (calls **app**) connects in database container (calls **database**), this means that app container depends on database container. For start both containers you have to execute following command:
+
+```bash
+docker-compose up app
+```
+
+In case you want to hide output docker information, you need to add *-d* parameter: ``` docker-compose up -d app ```.
+
+Done! You are able to use API acessing http://localhost:3000. Try to check healthcheck endpoint: http://localhost:3000/v1/healthcheck.
+
+### Executing Tests
+
+This project uses [Rspec](https://relishapp.com/rspec/) as a test tool, so execute all tests with following command.
+
+```bash
+docker-compose exec app rspec
+```
+
+For execute just one file test, you can inform a file in end of command.
+
+```bash
+docker-compose exec app rspec spec/services/healthcheck/get_spec.rb
+```
+
+### Executing Code Analizer
+
+This project uses [Rubocop](https://www.rubocop.org) as a Code Analizer tool, so analize all code with following command.
+
+```bash
+docker-compose exec app rubocop
+```
+
+For analize just one file, you can inform a file in end of command.
+
+```bash
+docker-compose exec app rubocop app/services/healthcheck/get.rb
+```
+
+## Directory Structure
 
 - **app** -> Main API Directory. Where is contained all API logic.
   - **endpoints** -> Processing logic of endpoints
     - **entities** -> Presentation logic of Endpoints data result. Each resource has an Entity representation.
     - **v1** -> Endpoints logical construction (version 1). Each resource has a directory and each http method (get, post, put, delete, etc) has a file.
   - **errors** -> Has error classes customized.
-  - **models** -> Keep model classes bound or not with database tables.
+  - **models** -> Keeps model classes bound or not with database tables.
   - **services** -> Contains every business logic for each operation. Each resource has a directory and each operation (get, create, update, delete) has a file.
   - **validators** -> Contains validators classes or modules used to services. Each resource has a directory and each operation has a file.
 - **config** -> Contains application configuration files.
