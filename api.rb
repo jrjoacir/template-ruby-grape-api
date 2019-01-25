@@ -2,13 +2,10 @@ class API < Grape::API
   format :json
   version :v1
 
-  rescue_from Errors::NotFound do |e|
-    error!({ message: e.message, with: Endpoints::Entities::Error }, 404)
-  end
+  helpers Endpoints::Helpers::APIErrors
 
-  rescue_from Errors::AlreadyExist do |e|
-    error!({ message: e.message, with: Endpoints::Entities::Error }, 409)
-  end
+  rescue_from Errors::NotFound, with: :not_found
+  rescue_from Errors::AlreadyExist, with: :conflict
 
   mount Endpoints::V1::Mounts::Healthcheck
   mount Endpoints::V1::Mounts::App
