@@ -18,10 +18,10 @@ RSpec.describe Services::App::Delete do
     context 'when is invalid' do
       context 'when app not found' do
         let(:id) { 1 }
-        let(:error) { Errors::Business::NotFound }
+        let(:error) { Errors::NotFound }
         let(:error_message) { 'App does not exist' }
 
-        it 'raise Errors::Business::NotFound' do
+        it 'raise Errors::NotFound' do
           expect { subject }.to raise_error(error, error_message)
         end
       end

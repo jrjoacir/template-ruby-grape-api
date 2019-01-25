@@ -11,11 +11,11 @@ module Validators
     private
 
     def already_exist_error
-      raise Errors::Business::AlreadyExist, 'App already exists'
+      raise Errors::AlreadyExist, 'App already exists'
     end
 
     def not_found_error
-      raise Errors::Business::NotFound, 'App does not exist'
+      raise Errors::NotFound, 'App does not exist'
     end
   end
 end
