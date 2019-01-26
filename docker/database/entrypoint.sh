@@ -126,6 +126,17 @@ if [ "$1" = 'postgres' ]; then
 			EOSQL
 			echo
 		fi
+
+		"${psql[@]}" --dbname postgres --set db=postgres_dev <<-'EOSQL'
+			CREATE DATABASE :"db" ;
+		EOSQL
+		echo
+
+		"${psql[@]}" --dbname postgres --set db=postgres_test <<-'EOSQL'
+			CREATE DATABASE :"db" ;
+		EOSQL
+		echo
+
 		psql+=( --dbname "$POSTGRES_DB" )
 
 		echo

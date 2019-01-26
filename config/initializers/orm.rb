@@ -15,18 +15,6 @@ module ORM
         Sequel::Migrator.run(db, dir_migrations, target: version)
       end
 
-      def drop_test_database
-        raise 'Drop database not allowed' unless ENVIRONMENT == 'development'
-
-        db.run('DROP DATABASE IF EXISTS postgres_test')
-      end
-
-      def create_test_database
-        raise 'Create database not allowed' unless ENVIRONMENT == 'development'
-
-        db.run('CREATE DATABASE postgres_test OWNER postgres')
-      end
-
       private
 
       def connect(environment)

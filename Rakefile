@@ -8,10 +8,4 @@ namespace :db do
     version = args[:version].to_i if args[:version]
     ORM::Database.migrate(version)
   end
-
-  desc 'Create Test Database'
-  task :create_test_database do
-    ORM::Database.drop_test_database
-    ORM::Database.create_test_database
-  end
 end
