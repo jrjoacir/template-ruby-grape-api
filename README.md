@@ -25,7 +25,17 @@ docker-compose up app
 
 In case you want to hide output docker information, you need to add *-d* parameter: ``` docker-compose up -d app ```.
 
-Done! You are able to use API acessing http://localhost:3000. Try to check healthcheck endpoint: http://localhost:3000/v1/healthcheck.
+Done!
+You are able to use API acessing http://localhost:3000. Try to check healthcheck endpoint: http://localhost:3000/v1/healthcheck.
+
+Some information about containers:
+- **database**
+  - **Port**: 5432
+  - Databases created with ```docker/database/entrypoint.sh``` file: ```postgres_test``` and ```postgres_dev```
+
+- **application**
+  - **Port**: 3000
+  - Web Server started with ```docker/app/entrypoint.sh``` file
 
 More information about *stop*, *start*, *restart* containers and so on, read [Docker Compose Documentation](https://docs.docker.com/compose/) and [Docker Documentation](https://docs.docker.com/).
 
@@ -77,14 +87,6 @@ In case an environment is not informed, **Development** environment is used, but
 
 ```bash
 docker-compose exec app rake db:migrate RACK_ENV=development
-```
-
-### (Re)Create Test Database
-
-It is possible create and recreate the Test database just executing a rake task.
-
-```bash
-docker-compose exec app rake db:create_test_database
 ```
 
 ## Directory Structure
