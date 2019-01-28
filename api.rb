@@ -1,4 +1,6 @@
 class API < Grape::API
+  use GrapeLogging::Middleware::RequestLogger unless ENV['RACK_ENV'] == 'test'
+
   format :json
   version :v1
 
