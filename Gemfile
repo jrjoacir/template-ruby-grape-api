@@ -1,6 +1,7 @@
 source 'https://rubygems.org'
 
 gem 'byebug', '~> 10.0', '>= 10.0.2'
+gem 'database_cleaner', '~> 1.7'
 gem 'dotenv', '~> 2.5'
 gem 'factory_bot', '~> 4.11', '>= 4.11.1'
 gem 'grape', '~> 1.1'
