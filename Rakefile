@@ -11,6 +11,9 @@ namespace :db do
   end
 
   task :seeds do
+    error_message = 'Seeds only can be executed in Development environment'
+    raise StandardError, error_message unless ENV['RACK_ENV'] == 'development'
+
     Seeds.execute
   end
 end

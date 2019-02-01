@@ -35,7 +35,6 @@ module ORM
       end
 
       def db_config(environment)
-        # what's difference betweem YAML.safe_load and YAML.load?
         config = YAML.safe_load(ERB.new(File.read(path_config_file)).result)
         config[environment]
       end
