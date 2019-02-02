@@ -92,10 +92,9 @@ docker-compose exec app rake db:migrate RACK_ENV=development
 ## Directory Structure
 
 - **app** -> Main API Directory. Where is contained all API logic.
-  - **endpoints** -> Processing logic of endpoints
-    - **entities** -> Presentation logic of Endpoints data result. Each resource has an Entity representation.
-    - **v1** -> Endpoints logical construction (version 1) and endpoint mounts. Each resource has a directory and each http method (get, post, put, delete, etc) has a file.
-    - **helpers** -> Helper classes or modules for use in API mounts
+  - **endpoints** -> Endpoints logical construction (version 1) and endpoint mounts, divided by versions (v1, v2, v3 ...). Each resource has a directory and each http method (get, post, put, delete, etc) has a file.
+  - **helpers** -> Helper classes or modules for use in API
+  - **entities** -> Presentation logic of Endpoints data result, divided by versions (v1, v2, v3 ...). Each resource has an Entity representation.
   - **errors** -> Has error classes customized.
   - **models** -> Keeps model classes bound or not with database tables.
   - **services** -> Contains every business logic for each operation. Each resource has a directory and each operation (get, create, update, delete) has a file.

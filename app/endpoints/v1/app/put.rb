@@ -12,7 +12,7 @@ module Endpoints
           id = params[:id]
           params.slice!(:name, :description)
           app = Services::App::Update.execute(id, params)
-          present app, with: Endpoints::Entities::App
+          present app, with: Entities::V1::App
         end
       end
     end

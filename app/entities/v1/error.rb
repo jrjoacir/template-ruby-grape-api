@@ -1,5 +1,5 @@
-module Endpoints
-  module Entities
+module Entities
+  module V1
     class Error < Grape::Entity
       expose :message
     end

@@ -11,7 +11,7 @@ module Endpoints
         post do
           params.slice!(:name, :description)
           app = Services::App::Create.execute(params)
-          present app, with: Endpoints::Entities::App
+          present app, with: Entities::V1::App
         end
       end
     end

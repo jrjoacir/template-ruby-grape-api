@@ -1,5 +1,5 @@
-module Endpoints
-  module Entities
+module Entities
+  module V1
     class Service < Grape::Entity
       expose :status
       expose :duration

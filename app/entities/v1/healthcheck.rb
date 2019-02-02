@@ -1,8 +1,8 @@
-module Endpoints
-  module Entities
+module Entities
+  module V1
     class Healthcheck < Grape::Entity
       expose :date_time, as: :now
-      expose :database, using: Endpoints::Entities::Service
+      expose :database, using: Entities::V1::Service
 
       private
 

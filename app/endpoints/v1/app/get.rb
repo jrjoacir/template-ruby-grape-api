@@ -5,7 +5,7 @@ module Endpoints
         desc 'Application information'
         get do
           app = Services::App::Get.execute
-          present app, with: Endpoints::Entities::App
+          present app, with: Entities::V1::App
         end
       end
     end

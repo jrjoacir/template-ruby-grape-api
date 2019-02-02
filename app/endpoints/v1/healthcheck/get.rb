@@ -5,7 +5,7 @@ module Endpoints
         desc 'Healthcheck information'
         get do
           healthcheck = Services::Healthcheck::Get.execute
-          present healthcheck, with: Endpoints::Entities::Healthcheck
+          present healthcheck, with: Entities::V1::Healthcheck
         end
       end
     end
