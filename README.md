@@ -1,4 +1,4 @@
-# container-smasher
+# template-ruby-grape-api
 
 ## Dependencies
 
@@ -89,9 +89,20 @@ In case an environment is not informed, **Development** environment is used, but
 docker-compose exec app rake db:migrate RACK_ENV=development
 ```
 
+### Data Examples
+
+If you need to insert some data in database, you can use the rake task *seeds* with the following command.
+
+```bash
+docker-compose exec app rake db:seeds
+```
+
+**Note**: This rake task only insert data in development database.
+
 ## Directory Structure
 
 - **app** -> Main API Directory. Where is contained all API logic.
+  - **commands** -> Keeps classes or modules with one specific action
   - **endpoints** -> Endpoints logical construction (version 1) and endpoint mounts, divided by versions (v1, v2, v3 ...). Each resource has a directory and each http method (get, post, put, delete, etc) has a file.
   - **helpers** -> Helper classes or modules for use in API
   - **entities** -> Presentation logic of Endpoints data result, divided by versions (v1, v2, v3 ...). Each resource has an Entity representation.
@@ -104,37 +115,22 @@ docker-compose exec app rake db:migrate RACK_ENV=development
   - **initializers** -> Has files that need to be load in the application initialization.
 - **db** -> Contains files associated to database execution using or not an ORM.
   - **migrations** -> Contains Sequel ORM migrations files.
+  - **seeds** -> Contains classes that create data examples in database.
 - **docker** -> Has docker configuration files.
   - **app** -> Contains docker configuration files for application container.
   - **database** -> Contains docker configuration files for database container.
 - **spec** -> Has all tests, classes and modules for support tests, factories, everything about tests. Each written test has to follow their directory structure.
   - **factories** -> Keeps every factories class (we are using [FactoryBot](https://github.com/thoughtbot/factory_bot)).
-  - **support** -> Has every need to help test classes.
   - **endpoints** -> Contains tests for Endpoints.
   - **models** -> Contains tests for Models.
   - **services** -> Contains tests for Services.
+  - **commands** -> Contains tests for Commands.
 
-## Additional information (Draft)
+## Additional information
 
-- Postgresql 11 (Container Docker)
-    - Dockerfile got on official Postgresql Dockerfile (https://hub.docker.com/_/postgres/)
-    - Build Docker Container with a good name: docker build -t postgresql:container-smasher ./database/config/docker
-    - Execute container (connect in database): docker run postgres:latest -e POSTGRES_PASSWORD=mysecretpassword -d postgres
-    **** - Execute commands inside container (connect in database): docker exec --name container-smasher -e POSTGRES_PASSWORD=mysecretpassword -d postgres
+- Dockerfile for Postgresql 11 (Container Docker) got on official Postgresql Dockerfile (https://hub.docker.com/_/postgres/)
 
-- Ruby 2.5 (Container Docker)
-    - Dockerfile got on official Postgresql Dockerfile (https://hub.docker.com/_/ruby/)
-    - Build Docker Container with a good name: docker build -t ruby:container-smasher .
-    - Execute container (execute bundle install): docker run ruby:container-smasher bundle install
-    **** - Execute commandas inside container (execute IRB):
-        - docker exec --name ruby:container-smasher irb
-        - docker-compose run --rm app irb
+- Dockerfile for Ruby 2.5 (Container Docker) got on official Postgresql Dockerfile (https://hub.docker.com/_/ruby/)
 
-- Execute migration: docker-compose exec app rake db:migrate RACK_ENV=development
-
-- Importante links:
-  - Docker
-      - https://hub.docker.com/_/postgres/
-      - http://flaviosilveira.com/2017/criando-seu-container-com-dockerfile/
-
+- [Design Patterns in Ruby](https://github.com/davidgf/design-patterns-in-ruby)
   
