@@ -1,5 +1,15 @@
 # template-ruby-grape-api
 
+Purpose of this project is to offer a template for create an API in [Ruby language](https://www.ruby-lang.org) using [Grape API framework](http://www.ruby-grape.org/) inside docker container and propose a development architecture for APIs. This template has:
+
+- An application docker container with Ruby language and their gems like Grape API Framework
+- A database docker container with Postgresql 11
+- A suggestion of directory structure for construct the application and their layers
+
+In this project exist endpoint examples for **App** and **Healthcheck** resources. We believe with these examples a developer can develop his/her application, but we intend to make a step-by-step soon.
+
+We continue to improve this project according new ideas and suggestions appear, or according bugs are found.
+
 ## Dependencies
 
 - [Docker](https://docs.docker.com/install/)
@@ -25,8 +35,9 @@ docker-compose up app
 
 In case you want to hide output docker information, you need to add *-d* parameter: ``` docker-compose up -d app ```.
 
-Done!
-You are able to use API acessing http://localhost:3000. Try to check healthcheck endpoint: http://localhost:3000/v1/healthcheck.
+**Done!**
+
+You are able to use your API acessing http://localhost:3000. Try to check healthcheck endpoint: http://localhost:3000/v1/healthcheck.
 
 Some information about containers:
 - **database**
@@ -67,7 +78,7 @@ For analize just one file, you can inform a file in end of command.
 docker-compose exec app rubocop app/services/healthcheck/get.rb
 ```
 
-### Code Coverage
+### Executing Code Coverage
 
 This project user [Simplecov](https://github.com/colszowka/simplecov) Ruby gem as Code Coverage tool, so know about this project code coverage opening file [./coverage/index.html](./coverage/index.html) after execute all tests with *Rspec* command.
 
@@ -103,7 +114,7 @@ docker-compose exec app rake db:seeds
 
 - **app** -> Main API Directory. Where is contained all API logic.
   - **commands** -> Keeps classes or modules with one specific action
-  - **endpoints** -> Endpoints logical construction (version 1) and endpoint mounts, divided by versions (v1, v2, v3 ...). Each resource has a directory and each http method (get, post, put, delete, etc) has a file.
+  - **endpoints** -> Endpoints logical construction and endpoint mounts, divided by versions (v1, v2, v3 ...). Each resource has a directory and each http method (get, post, put, delete, etc) has a file.
   - **helpers** -> Helper classes or modules for use in API
   - **entities** -> Presentation logic of Endpoints data result, divided by versions (v1, v2, v3 ...). Each resource has an Entity representation.
   - **errors** -> Has error classes customized.
@@ -128,9 +139,8 @@ docker-compose exec app rake db:seeds
 
 ## Additional information
 
-- Dockerfile for Postgresql 11 (Container Docker) got on official Postgresql Dockerfile (https://hub.docker.com/_/postgres/)
+- Dockerfile for Postgresql 11 (Container Docker) got on official [Postgresql Dockerfile](https://hub.docker.com/_/postgres/)
 
-- Dockerfile for Ruby 2.5 (Container Docker) got on official Postgresql Dockerfile (https://hub.docker.com/_/ruby/)
+- Dockerfile for Ruby 2.5 (Container Docker) got on official [Ruby Dockerfile](https://hub.docker.com/_/ruby/)
 
 - [Design Patterns in Ruby](https://github.com/davidgf/design-patterns-in-ruby)
-  
