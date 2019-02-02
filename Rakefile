@@ -1,7 +1,6 @@
 ENV['RACK_ENV'] ||= 'development'
 
 require_relative 'application'
-require_relative 'db/seeds/seed'
 
 namespace :db do
   desc 'Run migrations'
@@ -11,6 +10,7 @@ namespace :db do
   end
 
   task :seeds do
+    require_relative 'db/seeds/seed'
     error_message = 'Seeds only can be executed in Development environment'
     raise StandardError, error_message unless ENV['RACK_ENV'] == 'development'
 
