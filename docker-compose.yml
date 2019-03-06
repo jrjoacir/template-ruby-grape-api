@@ -19,3 +19,9 @@ services:
     volumes:
       - .:/usr/src/app
     entrypoint: 'sh ./docker/app/entrypoint.sh'
+  swagger:
+    build:
+      context: ./docker/swagger
+      dockerfile: Dockerfile
+    ports:
+      - "80:8080"

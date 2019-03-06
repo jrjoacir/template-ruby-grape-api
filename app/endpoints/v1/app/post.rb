@@ -2,10 +2,18 @@ module Endpoints
   module V1
     module App
       class Post < Grape::API
-        desc 'Create application'
+        desc 'Create an application' do
+          entity Entities::V1::App
+          failure [{ code: 409,
+                     message: 'App already exists',
+                     model: Entities::V1::Error }]
+        end
+
         params do
-          requires :name, type: String, desc: 'Name'
-          optional :description, type: String, desc: 'Description'
+          requires :name, type: String, desc: 'App name',
+                          documentation: { param_type: 'body' }
+          optional :description, type: String, desc: 'App description',
+                                 documentation: { param_type: 'body' }
         end
 
         post do
