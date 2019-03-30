@@ -110,6 +110,23 @@ docker-compose exec app rake db:seeds
 
 **Note**: This rake task only insert data in development database.
 
+## Swagger Documentation (experimental)
+
+This project has a docker container to start a Swagger documentation server. This container calls **swagger** and you can start it with the following docker-compose command:
+
+```bash
+docker-compose up swagger
+```
+
+To access Swagger documentation page, visit [http://localhost](http://localhost), inform **http://localhost:3000/v1/swagger_doc** in explore bar and press Explore to see project documentation API. Some funcionalities still don't work in this project version.
+
+In case you want to hide output docker information, you need to add *-d* parameter: ```docker-compose up -d swagger```.
+
+### About this container
+
+- **swagger**
+  - **Port**: 80
+
 ## Directory Structure
 
 - **app** -> Main API Directory. Where is contained all API logic.
@@ -130,6 +147,7 @@ docker-compose exec app rake db:seeds
 - **docker** -> Has docker configuration files.
   - **app** -> Contains docker configuration files for application container.
   - **database** -> Contains docker configuration files for database container.
+  - **swagger** -> Contains docker configuration files for swagger container.
 - **spec** -> Has all tests, classes and modules for support tests, factories, everything about tests. Each written test has to follow their directory structure.
   - **factories** -> Keeps every factories class (we are using [FactoryBot](https://github.com/thoughtbot/factory_bot)).
   - **endpoints** -> Contains tests for Endpoints.
