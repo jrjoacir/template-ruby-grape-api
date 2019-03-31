@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.describe Endpoints::V1::Healthcheck::Get do
   before do
     expect(Commands::GetStatusDatabase).to receive(:execute)

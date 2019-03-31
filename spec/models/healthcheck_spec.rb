@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.describe Models::Healthcheck do
   context 'when healthcheck is initialized' do
     let(:healthcheck) { Models::Healthcheck.new(services) }

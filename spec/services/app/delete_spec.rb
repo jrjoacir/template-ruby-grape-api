@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.describe Services::App::Delete do
   context '#execute' do
     subject { Services::App::Delete.execute(id) }

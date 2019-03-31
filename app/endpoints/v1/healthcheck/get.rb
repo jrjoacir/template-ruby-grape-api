@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Endpoints
   module V1
     module Healthcheck

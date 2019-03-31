@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.describe Services::App::Update do
   context '#execute' do
     subject { Services::App::Update.execute(id, params) }

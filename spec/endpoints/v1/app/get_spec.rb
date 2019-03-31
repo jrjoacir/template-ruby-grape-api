@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.describe Endpoints::V1::App::Get do
   subject { get('v1/app') }
 

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Models
   class ServiceStatus
     attr_reader :status, :duration, :error

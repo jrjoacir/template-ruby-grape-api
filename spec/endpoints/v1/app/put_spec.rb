@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.describe Endpoints::V1::App::Put do
   before { put("v1/app/#{id}", params) }
   let(:params) { { name: 'new name', description: 'new description' } }

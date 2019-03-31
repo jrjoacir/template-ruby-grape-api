@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.describe Models::App do
   context '#initialize' do
     let(:app) { Models::App.new(app_hash) }

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_dir 'app'
 require 'database_cleaner'
 

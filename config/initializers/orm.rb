@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module ORM
   class Database
     ENVIRONMENT = ENV['RACK_ENV']

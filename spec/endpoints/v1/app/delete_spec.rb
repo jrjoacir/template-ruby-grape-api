@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.describe Endpoints::V1::App::Delete do
   before { delete("v1/app/#{id}") }
 

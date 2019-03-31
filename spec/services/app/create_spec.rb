@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.describe Services::App::Create do
   context '#execute' do
     subject { Services::App::Create.execute(app_hash) }

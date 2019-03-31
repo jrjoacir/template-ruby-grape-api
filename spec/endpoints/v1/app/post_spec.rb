@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.describe Endpoints::V1::App::Post do
   subject { post('v1/app', params) }
   let(:params) { { name: 'new name', description: 'new description' } }
