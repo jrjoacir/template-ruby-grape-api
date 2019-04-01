@@ -18,7 +18,7 @@ We continue to improve this project according new ideas and suggestions appear, 
 ## Stack
 
 - Database -> [Postgresql 11](https://www.postgresql.org/)
-- Language -> [Ruby 2.5.3](http://ruby-doc.org/core-2.5.3/)
+- Language -> [Ruby 2.6.2](http://ruby-doc.org/core-2.6.2/)
   - API Framework -> [Grape](https://github.com/ruby-grape/grape)
   - Web Server -> [Puma](http://puma.io/)
   - Database ORM -> [Sequel](https://github.com/jeremyevans/sequel)
@@ -159,6 +159,6 @@ In case you want to hide output docker information, you need to add *-d* paramet
 
 - Dockerfile for Postgresql 11 (Container Docker) got on official [Postgresql Dockerfile](https://hub.docker.com/_/postgres/)
 
-- Dockerfile for Ruby 2.5 (Container Docker) got on official [Ruby Dockerfile](https://hub.docker.com/_/ruby/)
+- Dockerfile for Ruby (Container Docker) got on official [Ruby Dockerfile](https://hub.docker.com/_/ruby/)
 
 - [Design Patterns in Ruby](https://github.com/davidgf/design-patterns-in-ruby)
