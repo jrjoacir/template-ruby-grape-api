@@ -19,3 +19,7 @@ namespace :db do
     Seeds.execute
   end
 end
+
+task :default do
+  'Finished!'
+end
