@@ -8,11 +8,11 @@ env:
   - "RACK_ENV=travis-ci"
 
 before_install:
+  - cp config/database.travis.yml config/database.yml
   - gem update --system
   - gem install bundler
   - bundle install
   - rake db:migrate
-  - cp config/database.yml.travis config/database.yml
 
 services:
   - postgresql
