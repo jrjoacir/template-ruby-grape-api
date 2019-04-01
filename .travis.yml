@@ -17,6 +17,9 @@ before_install:
 services:
   - postgresql
 
+addons:
+  postgresql: "11"
+
 install:
   - bundle exec rspec
   - bundle exec rubocop
