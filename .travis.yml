@@ -5,7 +5,7 @@ rvm:
   - 2.6.2
 
 env:
-  - "RACK_ENV=travis-ci"
+  - "RACK_ENV=travis_ci"
 
 before_install:
   - cp config/database.travis.yml config/database.yml

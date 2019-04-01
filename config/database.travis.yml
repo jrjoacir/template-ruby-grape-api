@@ -1,2 +1,2 @@
-travis-ci:
+travis_ci:
   adapter: postgresql
