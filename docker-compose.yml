@@ -4,12 +4,14 @@ services:
     build:
       context: ./docker/database
       dockerfile: Dockerfile
-    #restart: always
     environment:
-      POSTGRES_DB: postgres
+      POSTGRES_MULTIPLE_DATABASES: postgres_dev,postgres_test
+      #POSTGRES_DB: postgres
       POSTGRES_USER: postgres
     ports:
       - "5432:5432"
+    volumes:
+      - ./docker/database/create-multiple-postgresql-databases.sh:/docker-entrypoint-initdb.d/create-multiple-postgresql-databases.sh
   app:
     build:
       context: .

@@ -42,7 +42,7 @@ You are able to use your API acessing http://localhost:3000. Try to check health
 Some information about containers:
 - **database**
   - **Port**: 5432
-  - Databases created with ```docker/database/entrypoint.sh``` file: ```postgres_test``` and ```postgres_dev```
+  - Databases created with ```docker/database/create-multiple-postgresql-databases.sh``` file: ```postgres_test``` and ```postgres_dev```
 
 - **application**
   - **Port**: 3000
