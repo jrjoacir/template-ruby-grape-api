@@ -2,7 +2,10 @@
 
 ENV['RACK_ENV'] ||= 'development'
 
-require_relative 'application'
+require 'require_smasher'
+require_gems 'grape', 'grape-entity', 'grape_logging', 'pg', 'sequel', 'erb', 'yaml', 'dotenv'
+require_file "config/environments/#{ENV['RACK_ENV']}"
+require_dirs 'config/initializers'
 
 namespace :db do
   desc 'Run migrations'
