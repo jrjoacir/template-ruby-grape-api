@@ -12,7 +12,8 @@ services:
       - "5432:5432"
     volumes:
       - ./docker/database/create-multiple-postgresql-databases.sh:/docker-entrypoint-initdb.d/create-multiple-postgresql-databases.sh
-  app:
+
+  app_development:
     build:
       context: .
       dockerfile: ./docker/app/Dockerfile
@@ -22,9 +23,28 @@ services:
       - "3000"
     ports:
       - "3000:3000"
+    env_file:
+      - ./.env.development
     volumes:
       - .:/usr/src/app
     entrypoint: 'sh ./docker/app/entrypoint.sh'
+
+  app_test:
+    build:
+      context: .
+      dockerfile: ./docker/app/Dockerfile
+    depends_on:
+      - database
+    expose:
+      - "3001"
+    ports:
+      - "3001:3000"
+    env_file:
+      - ./.env.test
+    volumes:
+      - .:/usr/src/app
+    entrypoint: 'sh ./docker/app/entrypoint.sh'
+
   swagger:
     build:
       context: ./docker/swagger
