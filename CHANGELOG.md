@@ -10,6 +10,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ### Changed
 - Load environments variable from **application.rb** file to **docker-compose.yml** file
 - Modified name App container from **app** to **app_development**
+- TravisCi uses docker-compose for its execution
 
 ## [1.4.0] - 2019-06-02
 ### Changed
