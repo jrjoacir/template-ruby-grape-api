@@ -3,5 +3,7 @@ services:
 
 before_install:
   - docker-compose up app_test
+
+install:
   - docker-compose run app_test rspec
   - docker-compose run app_test rubocop
