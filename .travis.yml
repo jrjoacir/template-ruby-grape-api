@@ -1,23 +1,7 @@
-language:
-  - ruby
-
 services:
   - docker
-
-rvm:
-  - 2.6.2
-
-env:
-  - RACK_ENV=travis_ci DB_LOG_FILE=db_travis_ci.log
 
 before_install:
   - docker-compose up app_test
   - docker-compose run app_test rspec
   - docker-compose run app_test rubocop
-
-services:
-  - postgresql
-
-install:
-  - bundle exec rspec
-  - bundle exec rubocop
