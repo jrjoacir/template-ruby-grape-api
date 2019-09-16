@@ -27,7 +27,7 @@ services:
       - ./.env.development
     volumes:
       - .:/usr/src/app
-    entrypoint: 'sh ./docker/app/entrypoint.sh'
+    command: sh -c "rake db:migrate && rake db:seeds && puma -p 3000"
 
   app_test:
     build:
@@ -43,7 +43,7 @@ services:
       - ./.env.test
     volumes:
       - .:/usr/src/app
-    entrypoint: 'sh ./docker/app/entrypoint.sh'
+    command: sh -c "rake db:migrate"
 
   swagger:
     build:
