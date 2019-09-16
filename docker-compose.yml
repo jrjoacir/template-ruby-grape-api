@@ -8,8 +8,6 @@ services:
       POSTGRES_MULTIPLE_DATABASES: postgres_dev,postgres_test
       #POSTGRES_DB: postgres
       POSTGRES_USER: postgres
-    ports:
-      - "5432:5432"
     volumes:
       - ./docker/database/create-multiple-postgresql-databases.sh:/docker-entrypoint-initdb.d/create-multiple-postgresql-databases.sh
 
@@ -27,7 +25,7 @@ services:
       - ./.env.development
     volumes:
       - .:/usr/src/app
-    entrypoint: 'sh ./docker/app/entrypoint.sh'
+    command: sh -c "rake db:migrate && rake db:seeds && puma -p 3000"
 
   app_test:
     build:
@@ -35,15 +33,11 @@ services:
       dockerfile: ./docker/app/Dockerfile
     depends_on:
       - database
-    expose:
-      - "3001"
-    ports:
-      - "3001:3000"
     env_file:
       - ./.env.test
     volumes:
       - .:/usr/src/app
-    entrypoint: 'sh ./docker/app/entrypoint.sh'
+    command: sh -c "rake db:migrate"
 
   swagger:
     build:
