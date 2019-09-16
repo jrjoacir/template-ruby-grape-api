@@ -65,13 +65,13 @@ docker-compose up app_test
 This project uses [Rspec](https://relishapp.com/rspec/) Ruby gem as a test tool, so execute all tests with following command.
 
 ```bash
-docker-compose exec app_test rspec
+docker-compose run --rm app_test rspec
 ```
 
 For execute just one file test, you can inform a file in end of command.
 
 ```bash
-docker-compose exec app_test rspec spec/services/healthcheck/get_spec.rb
+docker-compose run --rm app_test rspec spec/services/healthcheck/get_spec.rb
 ```
 
 ### Executing Code Analizer
