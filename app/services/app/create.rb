@@ -2,25 +2,12 @@
 
 module Services
   module App
-    class Create
-      include Validators::App::Create
-
-      def initialize(app)
-        self.app = app
-      end
-
+    module Create
       def self.execute(params)
-        new(Models::App.new(params)).execute
-      end
-
-      def execute
-        validate!
+        app = Models::App.new(params)
+        Validators::App::Create.execute!
         app.save
       end
-
-      private
-
-      attr_accessor :app
     end
   end
 end
