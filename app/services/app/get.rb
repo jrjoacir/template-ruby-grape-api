@@ -2,25 +2,13 @@
 
 module Services
   module App
-    class Get
-      include Validators::App::Get
-
-      def initialize(app)
-        self.app = app
-      end
-
+    module Get
       def self.execute
-        new(Models::App.first).execute
-      end
+        app = Models::App.first
+        Validators::App::Get.execute!(app)
 
-      def execute
-        validate!
         app
       end
-
-      private
-
-      attr_accessor :app
     end
   end
 end
