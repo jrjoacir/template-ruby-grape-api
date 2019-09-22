@@ -2,25 +2,12 @@
 
 module Services
   module App
-    class Delete
-      include Validators::App::Delete
-
-      def initialize(app)
-        self.app = app
-      end
-
+    module Delete
       def self.execute(id)
-        new(Models::App[id]).execute
-      end
-
-      def execute
-        validate!
+        app = Models::App[id]
+        Validators::App::Delete.execute!(app)
         app.delete
       end
-
-      private
-
-      attr_accessor :app
     end
   end
 end
