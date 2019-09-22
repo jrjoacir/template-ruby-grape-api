@@ -3,7 +3,8 @@
 RSpec.describe Models::Healthcheck do
   context 'when healthcheck is initialized' do
     let(:healthcheck) { Models::Healthcheck.new(services) }
-    let(:services) { Models::ServiceStatus.new(status, duration, error) }
+    let(:services) { Models::ServiceStatus.new(name, status, duration, error) }
+    let(:name) { 'service-name' }
     let(:status) { 'OK' }
     let(:duration) { 1 }
     let(:error) { nil }

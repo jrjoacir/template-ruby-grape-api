@@ -28,6 +28,10 @@ module ORM
         connect_database(time, attempt + 1)
       end
 
+      def test!
+        db.run('select 1')
+      end
+
       private
 
       def connect(environment)

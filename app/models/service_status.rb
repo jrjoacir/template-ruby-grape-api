@@ -2,16 +2,13 @@
 
 module Models
   class ServiceStatus
-    attr_reader :status, :duration, :error
+    attr_reader :name, :status, :duration, :error
 
-    def initialize(status, duration, error)
-      self.status = status
-      self.duration = duration
-      self.error = error
+    def initialize(name, status, duration, error = nil)
+      @name = name
+      @status = status
+      @duration = duration
+      @error = error
     end
-
-    private
-
-    attr_writer :status, :duration, :error
   end
 end
