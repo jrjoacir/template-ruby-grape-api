@@ -8,9 +8,9 @@ RSpec.describe Endpoints::V1::Healthcheck::Get do
 
   let(:duration) { 1 }
   let(:service_status) { Models::ServiceStatus.new(name, status, duration, error) }
-  let(:healthcheck) { { now: Time.now, services: [database_service] } }
+  let(:healthcheck) { { now: Time.now, database: database_service } }
   let(:response_body) { healthcheck.to_json }
-  let(:response_service) { JSON.parse(last_response.body).deep_symbolize_keys[:services] }
+  let(:response_service) { JSON.parse(last_response.body).deep_symbolize_keys[:database] }
   let(:name) { 'Database' }
   let(:database_service) do
     {
@@ -29,7 +29,7 @@ RSpec.describe Endpoints::V1::Healthcheck::Get do
     end
 
     it 'return healthcheck response body' do
-      expect(response_service).to eq [database_service]
+      expect(response_service).to eq database_service
       expect(JSON.parse(last_response.body)['now']).to be < Time.now
     end
   end
@@ -52,7 +52,7 @@ RSpec.describe Endpoints::V1::Healthcheck::Get do
     end
 
     it 'return healthcheck response body' do
-      expect(response_service).to eq [database_service]
+      expect(response_service).to eq database_service
       expect(JSON.parse(last_response.body)['now']).to be < Time.now
     end
   end

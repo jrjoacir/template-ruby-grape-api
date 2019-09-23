@@ -4,21 +4,19 @@ RSpec.describe Services::Healthcheck::Get do
   subject { Services::Healthcheck::Get.execute }
 
   context '#execute' do
-    context 'when status services is OK' do
+    context 'when database status service is OK' do
       before { expect(ORM::Database).to receive(:test!).and_return(nil) }
 
       it 'returns a Models::Healthcheck class' do
         expect(subject).to be_an Models::Healthcheck
       end
 
-      it 'returns a list of Models::ServiceStatus' do
-        expect(subject.services.first).to be_an Models::ServiceStatus
-        expect(subject.services.class).to be Array
-        expect(subject.services.count).to eq 1
+      it 'returns a Models::ServiceStatus' do
+        expect(subject.database.class).to be Models::ServiceStatus
       end
 
-      it 'returns status services OK' do
-        expect(subject.services.first.status).to eq 'OK'
+      it 'returns database status service OK' do
+        expect(subject.database.status).to eq 'OK'
       end
     end
 
@@ -29,14 +27,12 @@ RSpec.describe Services::Healthcheck::Get do
         expect(subject).to be_an Models::Healthcheck
       end
 
-      it 'returns a list of Models::ServiceStatus' do
-        expect(subject.services.first).to be_an Models::ServiceStatus
-        expect(subject.services.class).to be Array
-        expect(subject.services.count).to eq 1
+      it 'returns a Models::ServiceStatus' do
+        expect(subject.database.class).to be Models::ServiceStatus
       end
 
-      it 'returns status services NOT_OK' do
-        expect(subject.services.first.status).to eq 'NOT_OK'
+      it 'returns database status service NOT_OK' do
+        expect(subject.database.status).to eq 'NOT_OK'
       end
     end
   end

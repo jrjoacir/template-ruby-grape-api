@@ -2,22 +2,24 @@
 
 RSpec.describe Models::Healthcheck do
   context 'when healthcheck is initialized' do
-    let(:healthcheck) { Models::Healthcheck.new(services) }
-    let(:services) { Models::ServiceStatus.new(name, status, duration, error) }
+    before do
+      expect(Services::Healthcheck::Database).to receive(:execute).and_return(service)
+    end
+    let(:healthcheck) { Models::Healthcheck.new }
+    let(:service) { Models::ServiceStatus.new(name, status, duration, error) }
     let(:name) { 'service-name' }
     let(:status) { 'OK' }
     let(:duration) { 1 }
     let(:error) { nil }
-    let(:now) { Time.now }
 
     it 'healthcheck returns date_time greater than now' do
-      expect(now).to be < healthcheck.date_time
+      expect(healthcheck.date_time).to be < Time.now
       expect(healthcheck.date_time).to be_an Time
     end
 
-    it 'services attribute contains a ServiceStatus Class' do
-      expect(healthcheck.services).to be_an Models::ServiceStatus
-      expect(healthcheck.services.status).to eq 'OK'
+    it 'database attribute contains a ServiceStatus Class' do
+      expect(healthcheck.database).to be_an Models::ServiceStatus
+      expect(healthcheck.database.status).to eq 'OK'
     end
   end
 end

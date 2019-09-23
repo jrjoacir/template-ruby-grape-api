@@ -4,7 +4,7 @@ module Entities
   module V1
     class Healthcheck < Grape::Entity
       expose :date_time, as: :now
-      expose :services, using: Entities::V1::Service
+      expose :database, using: Entities::V1::Service
     end
   end
 end

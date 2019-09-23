@@ -4,9 +4,7 @@ module Services
   module Healthcheck
     module Get
       def self.execute
-        services = []
-        services << Services::Healthcheck::Database.execute
-        Models::Healthcheck.new(services)
+        Models::Healthcheck.new
       end
     end
   end

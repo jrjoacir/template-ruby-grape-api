@@ -2,11 +2,11 @@
 
 module Models
   class Healthcheck
-    attr_reader :date_time, :services
+    attr_reader :date_time, :database
 
-    def initialize(services)
+    def initialize
       @date_time = Time.now
-      @services = services
+      @database = Services::Healthcheck::Database.execute
     end
   end
 end
