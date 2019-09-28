@@ -11,8 +11,8 @@ module Services
         begin
           ORM::Database.test!
           Models::ServiceStatus.new(NAME, 'OK', Time.now - start)
-        rescue StandardError => error
-          Models::ServiceStatus.new(NAME, 'NOT_OK', Time.now - start, error.class)
+        rescue StandardError => e
+          Models::ServiceStatus.new(NAME, 'NOT_OK', Time.now - start, e.class)
         end
       end
     end
