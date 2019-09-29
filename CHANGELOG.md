@@ -6,6 +6,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ## Unreleased
 ### Added
 - Created container **app_test** only for execute tests
+- Set docker image in docker-compose.yml file for database service
 
 ### Changed
 - Load environments variable from **application.rb** file to **docker-compose.yml** file
@@ -14,6 +15,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - Become validators simpler than previous approach
 - Renamed app files to find them an easy way
 - Upgraded gem versions
+
+### Removed
+- Deleted Dockerfile database
 
 ## [1.4.0] - 2019-06-02
 ### Changed
