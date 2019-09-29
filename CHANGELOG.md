@@ -6,13 +6,14 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ## Unreleased
 ### Added
 - Created container **app_test** only for execute tests
-- Become validators simpler than previous approach
-- Renamed app files to find them an easy way
 
 ### Changed
 - Load environments variable from **application.rb** file to **docker-compose.yml** file
 - Modified name App container from **app** to **app_development**
 - TravisCi uses docker-compose for its execution
+- Become validators simpler than previous approach
+- Renamed app files to find them an easy way
+- Upgraded gem versions
 
 ## [1.4.0] - 2019-06-02
 ### Changed
