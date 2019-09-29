@@ -5,5 +5,5 @@ install:
   - docker-compose up app_test
 
 script:
-  - docker-compose run app_test rspec
-  - docker-compose run app_test rubocop
+  - docker-compose run --rm app_test rspec
+  - docker-compose run --rm app_test rubocop
