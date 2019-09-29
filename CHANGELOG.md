@@ -14,6 +14,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - Become validators simpler than previous approach
 - Renamed app files to find them an easy way
 - Upgraded gem versions
+- Improved use of ***require*** commands in files
 
 ## [1.4.0] - 2019-06-02
 ### Changed
