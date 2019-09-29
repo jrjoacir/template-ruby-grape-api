@@ -1,9 +1,7 @@
 version: '3'
 services:
   database:
-    build:
-      context: ./docker/database
-      dockerfile: Dockerfile
+    image: postgres:11-alpine
     environment:
       POSTGRES_MULTIPLE_DATABASES: postgres_dev,postgres_test
       #POSTGRES_DB: postgres

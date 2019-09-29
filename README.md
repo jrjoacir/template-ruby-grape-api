@@ -132,11 +132,10 @@ In case you want to hide output docker information, you need to add *-d* paramet
 ## Directory Structure
 
 - **app** -> Main API Directory. Where is contained all API logic.
-  - **commands** -> Keeps classes or modules with one specific action
   - **endpoints** -> Endpoints logical construction and endpoint mounts, divided by versions (v1, v2, v3 ...). Each resource has a directory and each http method (get, post, put, delete, etc) has a file.
-  - **helpers** -> Helper classes or modules for use in API
   - **entities** -> Presentation logic of Endpoints data result, divided by versions (v1, v2, v3 ...). Each resource has an Entity representation.
   - **errors** -> Has error classes customized.
+  - **helpers** -> Helper classes or modules for use in API
   - **models** -> Keeps model classes bound or not with database tables.
   - **services** -> Contains every business logic for each operation. Each resource has a directory and each operation (get, create, update, delete) has a file.
   - **validators** -> Contains validators classes or modules used to services. Each resource has a directory and each operation has a file.
