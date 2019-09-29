@@ -1,12 +1,10 @@
 # frozen_string_literal: true
 
 module Endpoints
-  module V1
-    module Mounts
-      class Healthcheck < Grape::API
-        namespace :healthcheck do
-          mount Endpoints::V1::Healthcheck::Get
-        end
+  module Mounts
+    class Healthcheck < Grape::API
+      namespace :healthcheck do
+        mount Endpoints::Healthcheck::Get
       end
     end
   end

@@ -44,7 +44,7 @@ In case you want to hide output docker information, you need to add *-d* paramet
 
 **Done!**
 
-You are able to use your API acessing http://localhost:3000. Try to check healthcheck endpoint: http://localhost:3000/v1/healthcheck.
+You are able to use your API acessing http://localhost:3000. Try to check healthcheck endpoint: http://localhost:3000/healthcheck.
 
 Some information about containers:
 - **database**

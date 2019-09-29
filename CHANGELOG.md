@@ -3,7 +3,7 @@ Here you can know about project evolution.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## Unreleased
+## [1.5.0] - 2019-09-29
 ### Added
 - Created container **app_test** only for execute tests
 - Set docker image in docker-compose.yml file for database service
@@ -17,9 +17,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - Upgraded gem versions
 - Improved use of ***require*** commands in files
 - Changed docker command to run tests and code analizer to remove docker container
+- Changed Healthcheck endpoint from ***v1*** level to ***top*** level
 
 ### Removed
-- Deleted Dockerfile database
+- Deleted Dockerfile darubocoptabase
 
 ## [1.4.0] - 2019-06-02
 ### Changed
