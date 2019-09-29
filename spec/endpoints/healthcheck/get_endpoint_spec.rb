@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
-RSpec.describe Endpoints::V1::Healthcheck::Get do
+RSpec.describe Endpoints::Healthcheck::Get do
   before do
     expect(Services::Healthcheck::Database).to receive(:execute).and_return(service_status)
-    get('v1/healthcheck')
+    get('healthcheck')
   end
 
   let(:duration) { 1 }
