@@ -3,10 +3,8 @@
 module Validators
   module App
     module Get
-      include Validators::App
-
-      def validate!
-        not_found!
+      def self.execute!(app)
+        raise Errors::NotFound, 'App does not exist' unless app
       end
     end
   end

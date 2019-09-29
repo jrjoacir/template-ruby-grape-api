@@ -20,12 +20,16 @@ module ORM
 
       def connect_database(time = Time.now, attempt = 1)
         ORM::Database.db
-      rescue StandardError => error
+      rescue StandardError => e
         error_message = "Database is not available after #{attempt} attempts"
-        error_message += ", during #{TIMEOUT_SECONDS} seconds: (#{error})"
-        raise error, error_message if Time.now - time > TIMEOUT_SECONDS
+        error_message += ", during #{TIMEOUT_SECONDS} seconds: (#{e})"
+        raise e, error_message if Time.now - time > TIMEOUT_SECONDS
 
         connect_database(time, attempt + 1)
+      end
+
+      def test!
+        db.run('select 1')
       end
 
       private

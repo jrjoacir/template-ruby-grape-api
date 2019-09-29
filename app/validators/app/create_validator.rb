@@ -3,10 +3,8 @@
 module Validators
   module App
     module Create
-      include Validators::App
-
-      def validate!
-        already_exist!
+      def self.execute!
+        raise Errors::AlreadyExist, 'App already exists' if Models::App.first
       end
     end
   end

@@ -1,22 +1,9 @@
-language:
-  - ruby
-
-rvm:
-  - 2.6.2
-
-env:
-  - "RACK_ENV=travis_ci"
-
-before_install:
-  - cp config/database.travis.yml config/database.yml
-  - gem update --system
-  - gem install bundler
-  - bundle install
-  - rake db:migrate
-
 services:
-  - postgresql
+  - docker
 
 install:
-  - bundle exec rspec
-  - bundle exec rubocop
+  - docker-compose up app_test
+
+script:
+  - docker-compose run --rm app_test rspec
+  - docker-compose run --rm app_test rubocop

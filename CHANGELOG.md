@@ -3,6 +3,24 @@ Here you can know about project evolution.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## Unreleased
+### Added
+- Created container **app_test** only for execute tests
+- Set docker image in docker-compose.yml file for database service
+
+### Changed
+- Load environments variable from **application.rb** file to **docker-compose.yml** file
+- Modified name App container from **app** to **app_development**
+- TravisCi uses docker-compose for its execution
+- Become validators simpler than previous approach
+- Renamed app files to find them an easy way
+- Upgraded gem versions
+- Improved use of ***require*** commands in files
+- Changed docker command to run tests and code analizer to remove docker container
+
+### Removed
+- Deleted Dockerfile database
+
 ## [1.4.0] - 2019-06-02
 ### Changed
 - Database image container from alpine:3.8 to postgres:11-alpine

@@ -1,5 +1,10 @@
 # template-ruby-grape-api
 
+|Branches|Status   |
+|--------|---------|
+|master  |[![Build Status](https://travis-ci.com/jrjoacir/template-ruby-grape-api.svg?branch=master)](https://travis-ci.com/jrjoacir/template-ruby-grape-api)|
+|develop |[![Build Status](https://travis-ci.com/jrjoacir/template-ruby-grape-api.svg?branch=develop)](https://travis-ci.com/jrjoacir/template-ruby-grape-api)|
+
 Purpose of this project is to offer a template for create an API in [Ruby language](https://www.ruby-lang.org) using [Grape API framework](http://www.ruby-grape.org/) inside docker container and propose a development architecture for APIs. This template has:
 
 - An application docker container with Ruby language and their gems like Grape API Framework
@@ -27,13 +32,15 @@ We continue to improve this project according new ideas and suggestions appear, 
 
 ### Building and Start Containers
 
-This project uses two docker containers: a **database** and an **application** container. The application container (calls **app**) connects in database container (calls **database**), this means that app container depends on database container. For start both containers you have to execute following command:
+This project uses two kind of docker containers: **database** and **application** container.
+
+The application container (calls **app_development**) connects in database container (calls **database**), this means that app container depends on database container. For start both containers you have to execute following command:
 
 ```bash
-docker-compose up app
+docker-compose up app_development
 ```
 
-In case you want to hide output docker information, you need to add *-d* parameter: ``` docker-compose up -d app ```.
+In case you want to hide output docker information, you need to add *-d* parameter: ```docker-compose up -d app_development```.
 
 **Done!**
 
@@ -52,16 +59,24 @@ More information about *stop*, *start*, *restart* containers and so on, read [Do
 
 ### Executing Tests
 
+This project uses one more container only to executing tests. This container calls **app_test**.
+
+First, you need to create a container for tests (it also depends on database container).
+
+```bash
+docker-compose up app_test
+```
+
 This project uses [Rspec](https://relishapp.com/rspec/) Ruby gem as a test tool, so execute all tests with following command.
 
 ```bash
-docker-compose exec app rspec
+docker-compose run --rm app_test rspec
 ```
 
 For execute just one file test, you can inform a file in end of command.
 
 ```bash
-docker-compose exec app rspec spec/services/healthcheck/get_spec.rb
+docker-compose run --rm app_test rspec spec/services/healthcheck/get_spec.rb
 ```
 
 ### Executing Code Analizer
@@ -69,13 +84,13 @@ docker-compose exec app rspec spec/services/healthcheck/get_spec.rb
 This project uses [Rubocop](https://www.rubocop.org) Ruby gem as a Code Analizer tool, so analize all code with following command.
 
 ```bash
-docker-compose exec app rubocop
+docker-compose exec app_development rubocop
 ```
 
 For analize just one file, you can inform a file in end of command.
 
 ```bash
-docker-compose exec app rubocop app/services/healthcheck/get.rb
+docker-compose exec app_development rubocop app/services/healthcheck/get.rb
 ```
 
 ### Executing Code Coverage
@@ -91,13 +106,7 @@ For this project we decided to use a Ruby gem calls [Rake](https://github.com/ru
 For execute database migrations:
 
 ```bash
-docker-compose exec app rake db:migrate
-```
-
-In case an environment is not informed, **Development** environment is used, but if you want to choose an environment you need to inform it in RACK_ENV variable.
-
-```bash
-docker-compose exec app rake db:migrate RACK_ENV=development
+docker-compose exec <app-container> rake db:migrate
 ```
 
 ### Data Examples
@@ -105,10 +114,8 @@ docker-compose exec app rake db:migrate RACK_ENV=development
 If you need to insert some data in database, you can use the rake task *seeds* with the following command.
 
 ```bash
-docker-compose exec app rake db:seeds
+docker-compose exec <app-container> rake db:seeds
 ```
-
-**Note**: This rake task only insert data in development database.
 
 ## Swagger Documentation (experimental)
 
@@ -130,11 +137,10 @@ In case you want to hide output docker information, you need to add *-d* paramet
 ## Directory Structure
 
 - **app** -> Main API Directory. Where is contained all API logic.
-  - **commands** -> Keeps classes or modules with one specific action
   - **endpoints** -> Endpoints logical construction and endpoint mounts, divided by versions (v1, v2, v3 ...). Each resource has a directory and each http method (get, post, put, delete, etc) has a file.
-  - **helpers** -> Helper classes or modules for use in API
   - **entities** -> Presentation logic of Endpoints data result, divided by versions (v1, v2, v3 ...). Each resource has an Entity representation.
   - **errors** -> Has error classes customized.
+  - **helpers** -> Helper classes or modules for use in API
   - **models** -> Keeps model classes bound or not with database tables.
   - **services** -> Contains every business logic for each operation. Each resource has a directory and each operation (get, create, update, delete) has a file.
   - **validators** -> Contains validators classes or modules used to services. Each resource has a directory and each operation has a file.
