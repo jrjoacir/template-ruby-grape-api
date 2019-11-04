@@ -37,6 +37,7 @@ This project uses two kind of docker containers: **database** and **application*
 The application container (calls **app_development**) connects in database container (calls **database**), this means that app container depends on database container. For start both containers you have to execute following command:
 
 ```bash
+docker-compose build app_development
 docker-compose up app_development
 ```
 
@@ -64,6 +65,7 @@ This project uses one more container only to executing tests. This container cal
 First, you need to create a container for tests (it also depends on database container).
 
 ```bash
+docker-compose build app_test
 docker-compose up app_test
 ```
 

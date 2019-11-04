@@ -2,12 +2,8 @@
 
 module HelpersApp
   module APIErrors
-    def not_found(exception)
-      error!({ message: exception.message, with: Entities::V1::Error }, 404)
-    end
-
-    def conflict(exception)
-      error!({ message: exception.message, with: Entities::V1::Error }, 409)
+    def error(http_error)
+      error!({ message: http_error.message, with: Entities::V1::Error }, http_error.http_status)
     end
   end
 end

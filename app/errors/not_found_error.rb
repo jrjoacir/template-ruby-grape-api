@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
 module Errors
-  class NotFound < StandardError
+  class NotFound < Errors::Http
     def initialize(message = 'Resource not found')
-      super
+      super(message, 404)
     end
   end
 end
