@@ -5,8 +5,7 @@ class API < Grape::API
   format :json
   helpers HelpersApp::APIErrors
 
-  rescue_from Errors::NotFound, with: :not_found
-  rescue_from Errors::AlreadyExist, with: :conflict
+  rescue_from Errors::Http, with: :error
 
   before do
     header['Access-Control-Allow-Origin'] = '*'
