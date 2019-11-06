@@ -1,5 +1,15 @@
 version: '3'
 services:
+  migrate:
+    build:
+      context: .
+      dockerfile: ./docker/app/Dockerfile
+    depends_on:
+      - database
+    volumes:
+      - .:/usr/src/app
+    command: sh migrate.sh
+
   database:
     image: postgres:11-alpine
     environment:
@@ -23,7 +33,7 @@ services:
       - ./.env.development
     volumes:
       - .:/usr/src/app
-    command: sh -c "rake db:migrate && rake db:seeds && puma -p 3000"
+    command: sh -c "puma -p 3000"
 
   app_test:
     build:
@@ -35,7 +45,6 @@ services:
       - ./.env.test
     volumes:
       - .:/usr/src/app
-    command: sh -c "rake db:migrate"
 
   swagger:
     build:
