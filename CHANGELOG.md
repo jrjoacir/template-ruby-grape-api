@@ -12,6 +12,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ## Changed
 - Way to handle http errors
 - Database Cleaner strategy from deletion to transaction
+- Docker image from ruby:2.6.2-alpine to ruby:2.6.4-alpine
+- Updated many gems to last version: factory_bot, puma, rspec, rubocop and sequel
 
 ## [1.5.0] - 2019-09-29
 ### Added
