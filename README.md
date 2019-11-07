@@ -30,14 +30,43 @@ We continue to improve this project according new ideas and suggestions appear, 
 
 ## Development Usage
 
-### Building and Start Containers
+### The Containers
 
-This project uses two kind of docker containers: **database** and **application** container.
+This project uses four docker containers:
+- **database**: Container that provides a Postgres database with two instances: *postgres_dev* and *postgres_test*.
+- **migrate**: Container that only run migrations and seeds tasks on database container. Depends on database container.
+- **app_development**: Container that executes the application. Depends on database container.
+- **app_test**: Container that executes tests and linter. Depends on database container.
+
+### Building Containers
+
+To build all containers just execute following command:
+
+```bash
+docker-compose build
+```
+
+To build a only one container, execute:
+
+```bash
+docker-compose build <container-name>
+```
+
+### Creating Database and some data
+
+To create database infrastructure, execute:
+
+```bash
+docker-compose run --rm migrate
+```
+
+Docker will execute a script (`migrate.sh`) that creates database objects and some example data, and destroy *migrate* container.
+
+### Starting Container Application
 
 The application container (calls **app_development**) connects in database container (calls **database**), this means that app container depends on database container. For start both containers you have to execute following command:
 
 ```bash
-docker-compose build app_development
 docker-compose up app_development
 ```
 
@@ -52,24 +81,16 @@ Some information about containers:
   - **Port**: 5432
   - Databases created with ```docker/database/create-multiple-postgresql-databases.sh``` file: ```postgres_test``` and ```postgres_dev```
 
-- **application**
+- **app_development**
   - **Port**: 3000
-  - Web Server started with ```docker/app/entrypoint.sh``` file
 
-More information about *stop*, *start*, *restart* containers and so on, read [Docker Compose Documentation](https://docs.docker.com/compose/) and [Docker Documentation](https://docs.docker.com/).
+More information about *stop*, *start*, *restart*, *run* containers and so on, read [Docker Compose Documentation](https://docs.docker.com/compose/) and [Docker Documentation](https://docs.docker.com/).
 
 ### Executing Tests
 
 This project uses one more container only to executing tests. This container calls **app_test**.
 
-First, you need to create a container for tests (it also depends on database container).
-
-```bash
-docker-compose build app_test
-docker-compose up app_test
-```
-
-This project uses [Rspec](https://relishapp.com/rspec/) Ruby gem as a test tool, so execute all tests with following command.
+Supposing app_test container is builded, execute all tests with following command:
 
 ```bash
 docker-compose run --rm app_test rspec
@@ -78,22 +99,28 @@ docker-compose run --rm app_test rspec
 For execute just one file test, you can inform a file in end of command.
 
 ```bash
-docker-compose run --rm app_test rspec spec/services/healthcheck/get_spec.rb
+docker-compose run --rm app_test rspec spec/services/healthcheck/get_service_spec.rb
 ```
+
+Both commands destroy *app_test* container.
+
+This project uses [Rspec](https://relishapp.com/rspec/) Ruby gem as a test tool.
 
 ### Executing Code Analizer
 
 This project uses [Rubocop](https://www.rubocop.org) Ruby gem as a Code Analizer tool, so analize all code with following command.
 
 ```bash
-docker-compose exec app_development rubocop
+docker-compose run --rm app_test rubocop
 ```
 
 For analize just one file, you can inform a file in end of command.
 
 ```bash
-docker-compose exec app_development rubocop app/services/healthcheck/get.rb
+docker-compose run --rm app_test rubocop app/services/healthcheck/get_service.rb
 ```
+
+Both commands destroy *app_test* container.
 
 ### Executing Code Coverage
 
