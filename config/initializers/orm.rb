@@ -4,7 +4,9 @@ module ORM
   class Database
     ENVIRONMENT = ENV['RACK_ENV']
     DB_LOG_FILE = ENV['DB_LOG_FILE']
-    TIMEOUT_SECONDS = 60
+    DB_CONFIG_FILE = ENV['DB_CONFIG_FILE']
+    DB_MIGRATIONS_DIRECTORY = ENV['DB_MIGRATIONS_DIRECTORY']
+    TIMEOUT_SECONDS = 5
 
     class << self
       def db
@@ -15,17 +17,7 @@ module ORM
 
       def migrate(version = nil)
         Sequel.extension :migration
-        Sequel::Migrator.run(db, dir_migrations, target: version)
-      end
-
-      def connect_database(time = Time.now, attempt = 1)
-        ORM::Database.db
-      rescue StandardError => e
-        error_message = "Database is not available after #{attempt} attempts"
-        error_message += ", during #{TIMEOUT_SECONDS} seconds: (#{e})"
-        raise e, error_message if Time.now - time > TIMEOUT_SECONDS
-
-        connect_database(time, attempt + 1)
+        Sequel::Migrator.run(db, DB_MIGRATIONS_DIRECTORY, target: version)
       end
 
       def test!
@@ -37,29 +29,33 @@ module ORM
       def connect(environment)
         config = db_config(environment)
         config.merge!(logger_config)
-        Sequel.connect(config)
+        try_connect(config)
+      end
+
+      def try_connect(config)
+        timeout = TIMEOUT_SECONDS
+        while timeout.positive?
+          begin
+            return Sequel.connect(config)
+          rescue StandardError => e
+            timeout -= 1
+            sleep(1)
+            raise "Database timeout: #{e}" if timeout <= 0
+          end
+        end
       end
 
       def db_config(environment)
-        config = YAML.safe_load(ERB.new(File.read(path_config_file)).result)
+        config = YAML.safe_load(ERB.new(File.read(DB_CONFIG_FILE)).result)
         config[environment]
       end
 
-      def path_config_file
-        'config/database.yml'
-      end
-
       def logger_config
-        file_name = "logs/#{DB_LOG_FILE}"
-        File.delete(file_name) if File.exist?(file_name)
-        { logger: Logger.new(file_name) }
-      end
-
-      def dir_migrations
-        'db/migrations'
+        File.delete(DB_LOG_FILE) if File.exist?(DB_LOG_FILE)
+        { logger: Logger.new(DB_LOG_FILE) }
       end
     end
   end
 end
 
-ORM::Database.connect_database
+ORM::Database.db
