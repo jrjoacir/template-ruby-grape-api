@@ -5,11 +5,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## Unreleased
 ## Added
-- Create container migrate just to run migrations and seeds tasks
-- Create `migrate.sh` script to run migrations and seeds tasks on migrate container
+- Container migrate just to run migrations and seeds tasks
+- `migrate.sh` script to run migrations and seeds tasks on migrate container
+- Environment variables to substitute fix config database values
 
 ## Changed
 - Way to handle http errors
+- Database Cleaner strategy from deletion to transaction
 - Docker image from ruby:2.6.2-alpine to ruby:2.6.4-alpine
 - Updated many gems to last version: factory_bot, puma, rspec, rubocop and sequel
 
