@@ -7,7 +7,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ## Added
 - Container migrate just to run migrations and seeds tasks
 - `migrate.sh` script to run migrations and seeds tasks on migrate container
-- Environments variable to substitute fix config database values
+- Environment variables to substitute fix config database values
 
 ## Changed
 - Way to handle http errors
