@@ -3,8 +3,8 @@
 FactoryBot.define do
   to_create(&:save)
 
-  factory :app, class: Models::App do
-    name { 'App' }
+  factory :project, class: Models::Project do
+    name { 'Project' }
     description { 'Description' }
   end
 end

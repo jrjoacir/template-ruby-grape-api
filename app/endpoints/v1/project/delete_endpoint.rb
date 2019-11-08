@@ -2,16 +2,16 @@
 
 module Endpoints
   module V1
-    module App
+    module Project
       class Delete < Grape::API
-        desc 'Delete an application' do
+        desc 'Delete a project' do
           failure [{ code: 404,
-                     message: 'App does not exist',
+                     message: 'Project does not exist',
                      model: Entities::V1::Error }]
         end
 
         delete ':id' do
-          Services::App::Delete.execute(params[:id])
+          Services::Project::Delete.execute(params[:id])
           body false
         end
       end

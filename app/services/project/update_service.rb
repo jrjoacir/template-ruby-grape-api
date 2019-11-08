@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
 module Services
-  module App
+  module Project
     module Update
       def self.execute(id, params)
-        app = Validators::App::Update.execute!(id)
-        app.update(params)
+        project = Validators::Project::Update.execute!(id)
+        project.update(params)
       end
     end
   end
