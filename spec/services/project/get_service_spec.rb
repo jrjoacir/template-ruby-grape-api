@@ -1,22 +1,22 @@
 # frozen_string_literal: true
 
-RSpec.describe Services::App::Get do
+RSpec.describe Services::Project::Get do
   context '#execute' do
-    subject { Services::App::Get.execute }
+    subject { Services::Project::Get.execute }
 
     context 'when is valid' do
-      before { FactoryBot.create(:app) }
+      before { FactoryBot.create(:project) }
 
-      it 'return an app model' do
-        expect(subject).to be_an Models::App
+      it 'return an project model' do
+        expect(subject).to be_an Models::Project
         expect(subject.id).to be_an Integer
       end
     end
 
     context 'when is invalid' do
-      context 'when app notfound' do
+      context 'when project notfound' do
         let(:error) { Errors::NotFound }
-        let(:error_message) { 'App does not exist' }
+        let(:error_message) { 'Project does not exist' }
 
         it 'raise Errors::NotFound' do
           expect { subject }.to raise_error(error, error_message)

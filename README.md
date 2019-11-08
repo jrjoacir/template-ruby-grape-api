@@ -11,7 +11,7 @@ Purpose of this project is to offer a template for create an API in [Ruby langua
 - A database docker container with Postgresql 11
 - A suggestion of directory structure for construct the application and their layers
 
-In this project exist endpoint examples for **App** and **Healthcheck** resources. We believe with these examples a developer can develop his/her application, but we intend to make a step-by-step soon.
+In this project exist endpoint examples for **Project** and **Healthcheck** resources. We believe with these examples the developer can develop his/her application, but we intend to make a step-by-step soon.
 
 We continue to improve this project according new ideas and suggestions appear, or according bugs are found.
 

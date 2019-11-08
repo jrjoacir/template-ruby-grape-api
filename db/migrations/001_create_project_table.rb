@@ -2,7 +2,7 @@
 
 Sequel.migration do
   up do
-    create_table(:app) do
+    create_table(:project) do
       primary_key :id
       String :name, null: false
       String :description
@@ -10,6 +10,6 @@ Sequel.migration do
   end
 
   down do
-    drop_table(:app)
+    drop_table(:project)
   end
 end
