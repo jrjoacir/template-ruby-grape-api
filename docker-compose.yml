@@ -1,15 +1,5 @@
 version: '3'
 services:
-  migrate:
-    build:
-      context: .
-      dockerfile: ./docker/app/Dockerfile
-    depends_on:
-      - database
-    volumes:
-      - .:/usr/src/app
-    command: sh migrate.sh
-
   database:
     image: postgres:11-alpine
     environment:
@@ -23,8 +13,9 @@ services:
     build:
       context: .
       dockerfile: ./docker/app/Dockerfile
-    depends_on:
+    links:
       - database
+      - migrate_app_development
     expose:
       - "3000"
     ports:
@@ -39,12 +30,47 @@ services:
     build:
       context: .
       dockerfile: ./docker/app/Dockerfile
+    links:
+      - database
+      - migrate_app_test
+    env_file:
+      - ./.env.test
+    volumes:
+      - .:/usr/src/app
+
+  migrate:
+    build:
+      context: .
+      dockerfile: ./docker/app/Dockerfile
+    links:
+      - migrate_app_development
+      - migrate_app_test
+    volumes:
+      - .:/usr/src/app
+
+  migrate_app_development:
+    build:
+      context: .
+      dockerfile: ./docker/app/Dockerfile
+    depends_on:
+      - database
+    env_file:
+      - ./.env.development
+    volumes:
+      - .:/usr/src/app
+    command: sh -c "rake db:migrate"
+
+  migrate_app_test:
+    build:
+      context: .
+      dockerfile: ./docker/app/Dockerfile
     depends_on:
       - database
     env_file:
       - ./.env.test
     volumes:
       - .:/usr/src/app
+    command: sh -c "rake db:migrate"
 
   swagger:
     build:

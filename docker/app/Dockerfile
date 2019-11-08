@@ -6,4 +6,3 @@ RUN gem update --system
 RUN gem install bundler
 RUN bundle install
 COPY . .
-CMD ["irb"]
