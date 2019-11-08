@@ -23,7 +23,7 @@ We continue to improve this project according new ideas and suggestions appear, 
 ## Stack
 
 - Database -> [Postgresql 11](https://www.postgresql.org/)
-- Language -> [Ruby 2.6.2](http://ruby-doc.org/core-2.6.2/)
+- Language -> [Ruby 2.6.4](http://ruby-doc.org/core-2.6.4/)
   - API Framework -> [Grape](https://github.com/ruby-grape/grape)
   - Web Server -> [Puma](http://puma.io/)
   - Database ORM -> [Sequel](https://github.com/jeremyevans/sequel)
@@ -34,9 +34,20 @@ We continue to improve this project according new ideas and suggestions appear, 
 
 This project uses four docker containers:
 - **database**: Container that provides a Postgres database with two instances: *postgres_dev* and *postgres_test*.
-- **migrate**: Container that only run migrations and seeds tasks on database container. Depends on database container.
-- **app_development**: Container that executes the application. Depends on database container.
-- **app_test**: Container that executes tests and linter. Depends on database container.
+- **migrate**: Container that only run migration task on database container. Depends on *migrate_app_development* and *migrate_app_test* containers.
+- **migrate_app_development**: Container that only run migration task on development database container. Depends on database container.
+- **migrate_app_test**: Container that only run migration task on test database container. Depends on database container.
+- **app_development**: Container that executes the application. Depends on *database* and *migrate_app_development* containers.
+- **app_test**: Container that executes tests and linter. Depends on *database* and *migrate_app_test* containers.
+
+| Services                    | Depends on / Links                         | Objetives                                                                              |
+|-----------------------------|--------------------------------------------|----------------------------------------------------------------------------------------|
+| **database**                |                                            | Creates Database Postgres container / Creates postgres_dev and postgres_test databases |
+| **app_development**         | database / migrate_app_development         | Creates and executes application container                                             |
+| **app_test**                | database / migrate_app_test                | Creates application test container                                                     |
+| **migrate**                 | migrate_app_development / migrate_app_test | Create a development database structure / Create a test database structure             |
+| **migrate_app_development** | database                                   | Create a development database structure                                                |
+| **migrate_app_test**        | database                                   | Create a test database structure                                                       |
 
 ### Building Containers
 
@@ -52,16 +63,6 @@ To build a only one container, execute:
 docker-compose build <container-name>
 ```
 
-### Creating Database and some data
-
-To create database infrastructure, execute:
-
-```bash
-docker-compose run --rm migrate
-```
-
-Docker will execute a script (`migrate.sh`) that creates database objects and some example data, and destroy *migrate* container.
-
 ### Starting Container Application
 
 The application container (calls **app_development**) connects in database container (calls **database**), this means that app container depends on database container. For start both containers you have to execute following command:
@@ -72,9 +73,51 @@ docker-compose up app_development
 
 In case you want to hide output docker information, you need to add *-d* parameter: ```docker-compose up -d app_development```.
 
+**Note:** in a first execution will be created database and its structure.
+
 **Done!**
 
 You are able to use your API acessing http://localhost:3000. Try to check healthcheck endpoint: http://localhost:3000/healthcheck.
+
+### Data Examples
+
+If you need to insert some data in development database, you can use the rake task *seeds* with the following command.
+
+```bash
+docker-compose run --rm app_development rake db:seeds
+```
+
+This command removes *app_development* container.
+
+### Creating Database and execute migration
+
+If you wish to just create database infrastructure on development and test databases, execute:
+
+```bash
+docker-compose up migrate
+```
+
+It will create database and execute migrations, creating database objects.
+
+### Creating Development Database and execute migration
+
+If you wish to just create development database infrastructure, execute:
+
+```bash
+docker-compose up migrate_app_development
+```
+
+It will create database and execute migrations, creating database objects.
+
+### Creating Development Database and execute migration
+
+If you wish to just create test database infrastructure, execute:
+
+```bash
+docker-compose up migrate_app_test
+```
+
+It will create database and execute migrations, creating database objects.
 
 Some information about containers:
 - **database**
@@ -102,7 +145,7 @@ For execute just one file test, you can inform a file in end of command.
 docker-compose run --rm app_test rspec spec/services/healthcheck/get_service_spec.rb
 ```
 
-Both commands destroy *app_test* container.
+Both commands remove *app_test* container.
 
 This project uses [Rspec](https://relishapp.com/rspec/) Ruby gem as a test tool.
 
@@ -120,7 +163,7 @@ For analize just one file, you can inform a file in end of command.
 docker-compose run --rm app_test rubocop app/services/healthcheck/get_service.rb
 ```
 
-Both commands destroy *app_test* container.
+Both commands remove *app_test* container.
 
 ### Executing Code Coverage
 
@@ -135,16 +178,10 @@ For this project we decided to use a Ruby gem calls [Rake](https://github.com/ru
 For execute database migrations:
 
 ```bash
-docker-compose exec <app-container> rake db:migrate
+docker-compose run --rm <app-container> rake db:migrate
 ```
 
-### Data Examples
-
-If you need to insert some data in database, you can use the rake task *seeds* with the following command.
-
-```bash
-docker-compose exec <app-container> rake db:seeds
-```
+This command removes container.
 
 ## Swagger Documentation (experimental)
 

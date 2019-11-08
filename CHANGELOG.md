@@ -3,17 +3,22 @@ Here you can know about project evolution.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## Unreleased
-## Added
-- Container migrate just to run migrations and seeds tasks
+## [Unreleased]
+### Added
+- Container migrate just to run migrations on test and development databases
 - `migrate.sh` script to run migrations and seeds tasks on migrate container
 - Environment variables to substitute fix config database values
+- Container migrate_app_test just to run migration on test database
+- Container migrate_app_development just to run migration on development database
 
-## Changed
+### Changed
 - Way to handle http errors
 - Database Cleaner strategy from deletion to transaction
 - Docker image from ruby:2.6.2-alpine to ruby:2.6.4-alpine
 - Updated many gems to last version: factory_bot, puma, rspec, rubocop and sequel
+
+### Removed
+- `migrate.sh` script
 
 ## [1.5.0] - 2019-09-29
 ### Added

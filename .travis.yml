@@ -2,10 +2,10 @@ services:
   - docker
 
 install:
-  - docker-compose build migrate
+  - docker-compose build migrate_app_test
   - docker-compose build app_test
 
 script:
-  - docker-compose run --rm migrate
   - docker-compose run --rm app_test rspec
   - docker-compose run --rm app_test rubocop
+  - docker-compose rm -f migrate_app_test
