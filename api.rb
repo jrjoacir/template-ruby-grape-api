@@ -7,11 +7,6 @@ class API < Grape::API
 
   rescue_from Errors::Http, with: :error
 
-  before do
-    header['Access-Control-Allow-Origin'] = '*'
-    header['Access-Control-Request-Method'] = '*'
-  end
-
   mount Endpoints::Mounts::Healthcheck
 
   version :v1

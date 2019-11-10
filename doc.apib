@@ -8,7 +8,7 @@ This project is a simple template API uses Grape framework and Ruby language.
 
 Resources related to Project in the API.
 
-## Project Collection [/project]
+## Project Collection [/projects]
 
 ### List the only one Project [GET]
 + Response 200 (application/json)
@@ -23,12 +23,18 @@ Resources related to Project in the API.
 + Response 201 (application/json)
     + Attributes (Project)
 
-## Project [/project/{id}]
+## Project [/projects/{id}]
 
 ### Delete a Project [DELETE]
++ Parameters
+    + id (number, required) - Project ID
+
 + Response 204
 
 ### Update a Project [PUT]
++ Parameters
+    + id (number, required) - Project ID
+
 + Request (application/json)
     + Attributes
         + name: Project name (string, required)
