@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 RSpec.describe Endpoints::V1::Project::Post do
-  subject { post('v1/project', params) }
+  subject { post('v1/projects', params) }
   let(:params) { { name: 'new name', description: 'new description' } }
 
   context 'when exist an project' do

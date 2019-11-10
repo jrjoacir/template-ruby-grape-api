@@ -6,6 +6,7 @@ module Services
       def self.execute(id, params)
         project = Validators::Project::Update.execute!(id)
         project.update(params)
+        Models::Project[id]
       end
     end
   end

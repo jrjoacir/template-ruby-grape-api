@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 RSpec.describe Endpoints::V1::Project::Put do
-  before { put("v1/project/#{id}", params) }
+  before { put("v1/projects/#{id}", params) }
   let(:params) { { name: 'new name', description: 'new description' } }
 
   context 'when exist an project' do

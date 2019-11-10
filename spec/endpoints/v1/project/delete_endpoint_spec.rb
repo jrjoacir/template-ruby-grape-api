@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 RSpec.describe Endpoints::V1::Project::Delete do
-  before { delete("v1/project/#{id}") }
+  before { delete("v1/projects/#{id}") }
 
   context 'when exist an project' do
     let(:id) { FactoryBot.create(:project).id }
