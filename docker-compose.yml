@@ -1,21 +1,5 @@
 version: '3'
 services:
-  doc:
-    build:
-      context: .
-      dockerfile: ./docker/app/blue.Dockerfile
-    expose:
-      - "8088"
-    ports:
-      - "8088:8088"
-    #env_file:
-    #  - ./.env.development
-    volumes:
-      - .:/usr/src/app
-    #command: sh -c "http doc.apib"
-    #command: sh -c "ls -l"
-    # docker-compose run --rm doc http -b localhost:8088 doc.apib
-
   migrate:
     build:
       context: .

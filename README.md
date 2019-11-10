@@ -158,6 +158,16 @@ To access Swagger documentation page, visit [http://localhost](http://localhost)
 
 In case you want to hide output docker information, you need to add *-d* parameter: ```docker-compose up -d swagger```.
 
+## API Blueprint Documentation (experimental)
+
+ This project has an API Blueprint documentation in `API.apib` file. To access this documentation, execute
+
+```bash
+docker run -it --rm -p 127.0.0.1:8088:8088/tcp -v $PWD:/doc quay.io/bukalapak/snowboard http -b 0.0.0.0:8088 API.apib
+```
+
+To access API Blueprint documentation page, visit [http://localhost:8088](http://localhost:8088).
+
 ### About this container
 
 - **swagger**
