@@ -4,7 +4,7 @@ module Endpoints
   module V1
     module Mounts
       class Project < Grape::API
-        namespace :project do
+        namespace :projects do
           mount Endpoints::V1::Project::Post
           mount Endpoints::V1::Project::Delete
           mount Endpoints::V1::Project::Put

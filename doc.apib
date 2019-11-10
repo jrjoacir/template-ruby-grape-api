@@ -1,0 +1,45 @@
+FORMAT: 1A
+
+# Template Ruby Grape API
+
+This project is a simple template API uses Grape framework and Ruby language.
+
+# Group Project
+
+Resources related to Project in the API.
+
+## Project Collection [/project]
+
+### List the only one Project [GET]
++ Response 200 (application/json)
+    + Attributes (Project)
+
+### Create a new Project [POST]
++ Request (application/json)
+    + Attributes
+        + name: Project name (string, required)
+        + description: Project description (string)
+
++ Response 201 (application/json)
+    + Attributes (Project)
+
+## Project [/project/{id}]
+
+### Delete a Project [DELETE]
++ Response 204
+
+### Update a Project [PUT]
++ Request (application/json)
+    + Attributes
+        + name: Project name (string, required)
+        + description: Project description (string, required)
+
++ Response 201 (application/json)
+    + Attributes (Project)
+
+## Data Structures
+
+### Project
++ id: 1 (number, required)
++ name: Project name (string, required)
++ description: Project description (string)

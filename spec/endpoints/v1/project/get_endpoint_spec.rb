@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 RSpec.describe Endpoints::V1::Project::Get do
-  subject { get('v1/project') }
+  subject { get('v1/projects') }
 
   context 'when exist an project' do
     before { project }
