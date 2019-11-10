@@ -10,6 +10,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - Environment variables to substitute fix config database values
 - Container migrate_app_test just to run migration on test database
 - Container migrate_app_development just to run migration on development database
+- API Blueprint documentation
 
 ### Changed
 - Way to handle http errors
@@ -17,6 +18,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - Docker image from ruby:2.6.2-alpine to ruby:2.6.4-alpine
 - Updated many gems to last version: factory_bot, puma, rspec, rubocop and sequel
 - Exchange App resource name by Project resource name
+- Name API resource changed from `project` to `projects`
 
 ### Removed
 - `migrate.sh` script
