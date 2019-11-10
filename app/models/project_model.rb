@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
 module Models
-  class App < Sequel::Model(:app)
+  class Project < Sequel::Model(:project)
   end
 end

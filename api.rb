@@ -16,7 +16,7 @@ class API < Grape::API
 
   version :v1
 
-  mount Endpoints::V1::Mounts::App
+  mount Endpoints::V1::Mounts::Project
 
   add_swagger_documentation(api_version: 'v1',
                             format: :json,
