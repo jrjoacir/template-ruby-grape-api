@@ -87,7 +87,9 @@ If you need to insert some data in development database, you can use the rake ta
 docker-compose run --rm app_development rake db:seeds
 ```
 
-This command removes *app_development* container.
+**Notes:**
+- Rake command clear all database tables before populate
+- Docker command removes *app_development* container
 
 ### Creating Database and execute migration
 

@@ -22,6 +22,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - Exchange App resource name by Project resource name
 - Name API resource changed from `project` to `projects`
 - Remove `before` block with headers `Access-Control-Allow-Origin` and `Access-Control-Request-Method` from class API
+- Defined gem groups in Gemfile
 
 ### Removed
 - `migrate.sh` script
