@@ -13,6 +13,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - API Blueprint documentation (https://apiblueprint.org)
 - Configuration Snowboard for API Blueprint with Playground (https://github.com/bukalapak/snowboard)
 - Rack-cors configuration
+- Docker-compose service `apiblueprint` for generate and execute API Blueprint documentation
 
 ### Changed
 - Way to handle http errors

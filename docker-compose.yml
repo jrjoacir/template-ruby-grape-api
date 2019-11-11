@@ -72,6 +72,16 @@ services:
       - .:/usr/src/app
     command: sh -c "rake db:migrate"
 
+  apiblueprint:
+    image: quay.io/bukalapak/snowboard
+    command: http -b 0.0.0.0:8088 --playground -c config/snowboard.yml doc.apib
+    expose:
+      - "8088"
+    ports:
+      - "8088:8088"
+    volumes:
+      - .:/doc
+
   swagger:
     build:
       context: ./docker/swagger
