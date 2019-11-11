@@ -187,10 +187,16 @@ This command removes container.
 
 ## API Blueprint Documentation
 
-This project has an API Blueprint documentation in `API.apib` file. To generate this documentation, execute:
+This project uses API Blueprint as API Documentation, so you can edit file `doc.apib` with all documentation you need. To generate HTML file for this documentation and access it by Snowboard, you can use a simple docker command:
 
 ```bash
 docker run -it --rm -p 127.0.0.1:8088:8088/tcp -v $PWD:/doc quay.io/bukalapak/snowboard http -b 0.0.0.0:8088 --playground -c config/snowboard.yml doc.apib
+```
+
+or use a docker service (`apiblueprint`) configured in `docker-compose.yml` file:
+
+```bash
+docker-compose up apiblueprint
 ```
 
 To access API Blueprint documentation page, visit [http://localhost:8088](http://localhost:8088).
