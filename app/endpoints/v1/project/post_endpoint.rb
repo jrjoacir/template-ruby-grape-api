@@ -4,18 +4,10 @@ module Endpoints
   module V1
     module Project
       class Post < Grape::API
-        desc 'Create a project' do
-          entity Entities::V1::Project
-          failure [{ code: 409,
-                     message: 'Project already exists',
-                     model: Entities::V1::Error }]
-        end
-
+        desc 'Create a project'
         params do
-          requires :name, type: String, desc: 'Project name',
-                          documentation: { param_type: 'body' }
-          optional :description, type: String, desc: 'Project description',
-                                 documentation: { param_type: 'body' }
+          requires :name, type: String, desc: 'Project name'
+          optional :description, type: String, desc: 'Project description'
         end
 
         post do

@@ -24,9 +24,15 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - Name API resource changed from `project` to `projects`
 - Remove `before` block with headers `Access-Control-Allow-Origin` and `Access-Control-Request-Method` from class API
 - Defined gem groups in Gemfile
+- Renamed *app_development* docker container to *development*
+- Renamed *app_test* docker container to *test*
 
 ### Removed
 - `migrate.sh` script
+- migrate_app_test docker container
+- migrate_app_development docker container
+- migrate docker container
+- SwaggerUI docker container
 
 ## [1.5.0] - 2019-09-29
 ### Added
