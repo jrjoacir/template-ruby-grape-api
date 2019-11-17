@@ -24,8 +24,6 @@ end
 group :test, :development do
   gem 'byebug', '~> 11.0', '>= 11.0.1'
   gem 'database_cleaner', '~> 1.7'
-  gem 'grape-swagger', '~> 0.33.0'
-  gem 'grape-swagger-entity', '~> 0.3.3'
   gem 'racksh', '~> 1.0'
   gem 'rubocop', '~> 0.76.0'
 end

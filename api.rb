@@ -12,12 +12,4 @@ class API < Grape::API
   version :v1
 
   mount Endpoints::V1::Mounts::Project
-
-  add_swagger_documentation(api_version: 'v1',
-                            format: :json,
-                            schemes: 'http',
-                            info: {
-                              title: 'Template Ruby Grape API',
-                              description: 'Documentation for version 1 API'
-                            })
 end

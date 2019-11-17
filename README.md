@@ -11,7 +11,7 @@ Purpose of this project is to offer a template for create an API in [Ruby langua
 - A database docker container with Postgresql 11
 - A suggestion of directory structure for construct the application and their layers
 
-In this project exist endpoint examples for **Project** and **Healthcheck** resources. We believe with these examples the developer can develop his/her application, but we intend to make a step-by-step soon.
+In this project exist endpoint examples for **Project** and **Healthcheck** resources. We believe with these examples the developer can develop his/her application.
 
 We continue to improve this project according new ideas and suggestions appear, or according bugs are found.
 
@@ -28,26 +28,40 @@ We continue to improve this project according new ideas and suggestions appear, 
   - Web Server -> [Puma](http://puma.io/)
   - Database ORM -> [Sequel](https://github.com/jeremyevans/sequel)
 
+## Quick start - *See the application working*
+
+1. Build all containers:
+
+    ```bash
+    docker-compose build
+    ```
+
+2. Start container **development**:
+
+    ```bash
+    docker-compose up development
+    ```
+
+3. **Done!**
+
+    You are able to use your API acessing http://localhost:3000. Try to check healthcheck endpoint: http://localhost:3000/healthcheck.
+
 ## Development Usage
 
 ### The Containers
 
 This project uses four docker containers:
 - **database**: Container that provides a Postgres database with two instances: *postgres_dev* and *postgres_test*.
-- **migrate**: Container that only run migration task on database container. Depends on *migrate_app_development* and *migrate_app_test* containers.
-- **migrate_app_development**: Container that only run migration task on development database container. Depends on database container.
-- **migrate_app_test**: Container that only run migration task on test database container. Depends on database container.
-- **app_development**: Container that executes the application. Depends on *database* and *migrate_app_development* containers.
-- **app_test**: Container that executes tests and linter. Depends on *database* and *migrate_app_test* containers.
+- **development**: Container that executes the application. Depends on container *database*.
+- **test**: Container that executes tests and linter. Depends on container *database*.
+- **apiblueprint**: Container that executes API documentation server.
 
-| Services                    | Depends on / Links                         | Objetives                                                                              |
+| Services                    | Depends on / Links                         | Objectives                                                                             |
 |-----------------------------|--------------------------------------------|----------------------------------------------------------------------------------------|
 | **database**                |                                            | Creates Database Postgres container / Creates postgres_dev and postgres_test databases |
-| **app_development**         | database / migrate_app_development         | Creates and executes application container                                             |
-| **app_test**                | database / migrate_app_test                | Creates application test container                                                     |
-| **migrate**                 | migrate_app_development / migrate_app_test | Create a development database structure / Create a test database structure             |
-| **migrate_app_development** | database                                   | Create a development database structure                                                |
-| **migrate_app_test**        | database                                   | Create a test database structure                                                       |
+| **development**             | database                                   | Creates and executes application container                                             |
+| **test**                    | database                                   | Creates application test container                                                     |
+| **apiblueprint**            |                                            | Creates a API documentation server                                                     |
 
 ### Building Containers
 
@@ -63,15 +77,15 @@ To build a only one container, execute:
 docker-compose build <container-name>
 ```
 
-### Starting Container Application
+### Starting application
 
-The application container (calls **app_development**) connects in database container (calls **database**), this means that app container depends on database container. For start both containers you have to execute following command:
+The application container (**development**) connects in database container (**database**), this means that development container depends on database container. For start both containers you have to execute following command:
 
 ```bash
-docker-compose up app_development
+docker-compose up development
 ```
 
-In case you want to hide output docker information, you need to add *-d* parameter: ```docker-compose up -d app_development```.
+In case you want to hide output docker information, you need to add *-d* parameter: ```docker-compose up -d development```.
 
 **Note:** in a first execution will be created database and its structure.
 
@@ -79,150 +93,105 @@ In case you want to hide output docker information, you need to add *-d* paramet
 
 You are able to use your API acessing http://localhost:3000. Try to check healthcheck endpoint: http://localhost:3000/healthcheck.
 
-### Data Examples
+### Create data examples
 
 If you need to insert some data in development database, you can use the rake task *seeds* with the following command.
 
 ```bash
-docker-compose run --rm app_development rake db:seeds
+docker-compose run --rm development rake db:seeds
 ```
 
 **Notes:**
 - Rake command clear all database tables before populate
-- Docker command removes *app_development* container
-
-### Creating Database and execute migration
-
-If you wish to just create database infrastructure on development and test databases, execute:
-
-```bash
-docker-compose up migrate
-```
-
-It will create database and execute migrations, creating database objects.
-
-### Creating Development Database and execute migration
-
-If you wish to just create development database infrastructure, execute:
-
-```bash
-docker-compose up migrate_app_development
-```
-
-It will create database and execute migrations, creating database objects.
-
-### Creating Development Database and execute migration
-
-If you wish to just create test database infrastructure, execute:
-
-```bash
-docker-compose up migrate_app_test
-```
-
-It will create database and execute migrations, creating database objects.
 
 Some information about containers:
 - **database**
   - **Port**: 5432
   - Databases created with ```docker/database/create-multiple-postgresql-databases.sh``` file: ```postgres_test``` and ```postgres_dev```
 
-- **app_development**
+- **development**
   - **Port**: 3000
 
 More information about *stop*, *start*, *restart*, *run* containers and so on, read [Docker Compose Documentation](https://docs.docker.com/compose/) and [Docker Documentation](https://docs.docker.com/).
 
-### Executing Tests
+### Execute tests
 
-This project uses one more container only to executing tests. This container calls **app_test**.
-
-Supposing app_test container is builded, execute all tests with following command:
+This project uses one more container only to executing tests. This container calls **test**. Create infrastructure for **test** container:
 
 ```bash
-docker-compose run --rm app_test rspec
+docker-compose up test
+```
+
+Execute all tests with following command:
+
+
+```bash
+docker-compose run --rm test rspec
 ```
 
 For execute just one file test, you can inform a file in end of command.
 
 ```bash
-docker-compose run --rm app_test rspec spec/services/healthcheck/get_service_spec.rb
+docker-compose run --rm test rspec spec/services/healthcheck/get_service_spec.rb
 ```
-
-Both commands remove *app_test* container.
 
 This project uses [Rspec](https://relishapp.com/rspec/) Ruby gem as a test tool.
 
-### Executing Code Analizer
+### Execute code analizer
+
+Create infrastructure for **test** container:
+
+```bash
+docker-compose up test
+```
 
 This project uses [Rubocop](https://www.rubocop.org) Ruby gem as a Code Analizer tool, so analize all code with following command.
 
 ```bash
-docker-compose run --rm app_test rubocop
+docker-compose run --rm test rubocop
 ```
 
 For analize just one file, you can inform a file in end of command.
 
 ```bash
-docker-compose run --rm app_test rubocop app/services/healthcheck/get_service.rb
+docker-compose run --rm test rubocop app/services/healthcheck/get_service.rb
 ```
 
-Both commands remove *app_test* container.
-
-### Executing Code Coverage
+### Code coverage
 
 This project user [Simplecov](https://github.com/colszowka/simplecov) Ruby gem as Code Coverage tool, so know about this project code coverage opening file [./coverage/index.html](./coverage/index.html) after execute all tests with *Rspec* command.
 
-## Rake Tasks
-
-For this project we decided to use a Ruby gem calls [Rake](https://github.com/ruby/rake) for execute some tasks.
 
 ### Database Migrations
 
 For execute database migrations:
 
 ```bash
-docker-compose run --rm <app-container> rake db:migrate
+docker-compose run --rm <container> rake db:migrate
 ```
 
 This command removes container.
 
 ## API Blueprint Documentation
 
-This project uses API Blueprint as API Documentation, so you can edit file `doc.apib` with all documentation you need. To generate HTML file for this documentation and access it by Snowboard, you can use a simple docker command:
-
-```bash
-docker run -it --rm -p 127.0.0.1:8088:8088/tcp -v $PWD:/doc quay.io/bukalapak/snowboard http -b 0.0.0.0:8088 --playground -c config/snowboard.yml doc.apib
-```
-
-or use a docker service (`apiblueprint`) configured in `docker-compose.yml` file:
+This project uses [API Blueprint](https://apiblueprint.org) as API Documentation, so you can edit file `doc.apib` with all documentation you need. To generate HTML file for this documentation and access it by Snowboard, you can use a simple docker-compose command:
 
 ```bash
 docker-compose up apiblueprint
 ```
 
-To access API Blueprint documentation page, visit [http://localhost:8088](http://localhost:8088).
+or use the following docker command:
+
+```bash
+docker run -it --rm -p 127.0.0.1:8088:8088/tcp -v $PWD:/doc quay.io/bukalapak/snowboard http -b 0.0.0.0:8088 --playground -c config/snowboard.yml doc.apib
+```
+
+To access API Blueprint local server documentation page, visit [http://localhost:8088](http://localhost:8088).
 
 A `config/snowboard.yml` configuration file was created to enable interative API documentation. So, its possible to simulate an API.
 
-## Swagger Documentation (experimental)
-
-This project has a docker container to start a Swagger documentation server. This container calls **swagger** and you can start it with the following docker-compose command:
-
-```bash
-docker-compose up swagger
-```
-
-To access Swagger documentation page, visit [http://localhost](http://localhost), inform **http://localhost:3000/v1/swagger_doc** in explore bar and press Explore to see project documentation API. Some funcionalities still don't work in this project version.
-
-In case you want to hide output docker information, you need to add *-d* parameter: ```docker-compose up -d swagger```.
-
-### About this container
-
-- **swagger**
-  - **Port**: 80
-
 ### More information about documentation
 - [API Blueprint](https://apiblueprint.org)
-- [Snowboard](https://github.com/bukalapak/snowboard) (Render API Blueprint)
 
 ## Directory Structure
 
@@ -243,7 +212,6 @@ In case you want to hide output docker information, you need to add *-d* paramet
 - **docker** -> Has docker configuration files.
   - **app** -> Contains docker configuration files for application container.
   - **database** -> Contains docker configuration files for database container.
-  - **swagger** -> Contains docker configuration files for swagger container.
 - **spec** -> Has all tests, classes and modules for support tests, factories, everything about tests. Each written test has to follow their directory structure.
   - **factories** -> Keeps every factories class (we are using [FactoryBot](https://github.com/thoughtbot/factory_bot)).
   - **endpoints** -> Contains tests for Endpoints.
