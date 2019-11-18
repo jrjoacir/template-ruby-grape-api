@@ -4,7 +4,7 @@
 |----------|---------|-------|
 |**Status**|[![Build Status](https://travis-ci.com/jrjoacir/template-ruby-grape-api.svg?branch=master)](https://travis-ci.com/jrjoacir/template-ruby-grape-api)|[![Build Status](https://travis-ci.com/jrjoacir/template-ruby-grape-api.svg?branch=develop)](https://travis-ci.com/jrjoacir/template-ruby-grape-api)|
 
-Está documentação também está disponível em [Português do Brasil](README_pt-BR.md).
+Está documentação também está disponível em [Português do Brasil](README_pt-br.md).
 
 Purpose of this project is to offer a template for create an API in [Ruby language](https://www.ruby-lang.org) using [Grape API framework](http://www.ruby-grape.org/) inside docker container and propose a development architecture for APIs. This template has:
 
