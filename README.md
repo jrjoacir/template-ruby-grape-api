@@ -1,9 +1,10 @@
 # template-ruby-grape-api
 
-|Branches|Status   |
-|--------|---------|
-|master  |[![Build Status](https://travis-ci.com/jrjoacir/template-ruby-grape-api.svg?branch=master)](https://travis-ci.com/jrjoacir/template-ruby-grape-api)|
-|develop |[![Build Status](https://travis-ci.com/jrjoacir/template-ruby-grape-api.svg?branch=develop)](https://travis-ci.com/jrjoacir/template-ruby-grape-api)|
+|          |Master   |Develop|
+|----------|---------|-------|
+|**Status**|[![Build Status](https://travis-ci.com/jrjoacir/template-ruby-grape-api.svg?branch=master)](https://travis-ci.com/jrjoacir/template-ruby-grape-api)|[![Build Status](https://travis-ci.com/jrjoacir/template-ruby-grape-api.svg?branch=develop)](https://travis-ci.com/jrjoacir/template-ruby-grape-api)|
+
+Está documentação também está disponível em [Português do Brasil](README_pt-BR.md).
 
 Purpose of this project is to offer a template for create an API in [Ruby language](https://www.ruby-lang.org) using [Grape API framework](http://www.ruby-grape.org/) inside docker container and propose a development architecture for APIs. This template has:
 
@@ -13,7 +14,7 @@ Purpose of this project is to offer a template for create an API in [Ruby langua
 
 In this project exist endpoint examples for **Project** and **Healthcheck** resources. We believe with these examples the developer can develop his/her application.
 
-We continue to improve this project according new ideas and suggestions appear, or according bugs are found.
+We will continue to improve this project according new ideas and suggestions appear, or according bugs are found.
 
 ## Dependencies
 
@@ -56,12 +57,12 @@ This project uses four docker containers:
 - **test**: Container that executes tests and linter. Depends on container *database*.
 - **apiblueprint**: Container that executes API documentation server.
 
-| Services                    | Depends on / Links                         | Objectives                                                                             |
-|-----------------------------|--------------------------------------------|----------------------------------------------------------------------------------------|
-| **database**                |                                            | Creates Database Postgres container / Creates postgres_dev and postgres_test databases |
-| **development**             | database                                   | Creates and executes application container                                             |
-| **test**                    | database                                   | Creates application test container                                                     |
-| **apiblueprint**            |                                            | Creates a API documentation server                                                     |
+| Services         | Depends on | Objectives                                                                            |
+|------------------|------------|---------------------------------------------------------------------------------------|
+| **database**     |            | Creates Database Postgres container / Creates postgres_dev and postgres_test databases|
+| **development**  | database   | Creates and executes application container                                            |
+| **test**         | database   | Creates application test container                                                    |
+| **apiblueprint** |            | Creates a API documentation server                                                    |
 
 ### Building Containers
 
@@ -159,7 +160,7 @@ docker-compose run --rm test rubocop app/services/healthcheck/get_service.rb
 
 ### Code coverage
 
-This project user [Simplecov](https://github.com/colszowka/simplecov) Ruby gem as Code Coverage tool, so know about this project code coverage opening file [./coverage/index.html](./coverage/index.html) after execute all tests with *Rspec* command.
+This project uses [Simplecov](https://github.com/colszowka/simplecov) Ruby gem as Code Coverage tool, so know about this project code coverage opening file [./coverage/index.html](./coverage/index.html) after execute all tests with *Rspec* command.
 
 
 ### Database Migrations
@@ -188,7 +189,7 @@ docker run -it --rm -p 127.0.0.1:8088:8088/tcp -v $PWD:/doc quay.io/bukalapak/sn
 
 To access API Blueprint local server documentation page, visit [http://localhost:8088](http://localhost:8088).
 
-A `config/snowboard.yml` configuration file was created to enable interative API documentation. So, its possible to simulate an API.
+The `config/snowboard.yml` configuration file was created to enable interative API documentation. So, its possible to simulate an API.
 
 ### More information about documentation
 - [API Blueprint](https://apiblueprint.org)
