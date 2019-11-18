@@ -2,8 +2,10 @@ services:
   - docker
 
 install:
-  - docker-compose up app_test
+  - docker-compose build test
+  - docker-compose up test
 
 script:
-  - docker-compose run --rm app_test rspec
-  - docker-compose run --rm app_test rubocop
+  - docker-compose run --rm test rspec
+  - docker-compose run --rm test rubocop
+  - docker-compose rm -f

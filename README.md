@@ -1,9 +1,10 @@
 # template-ruby-grape-api
 
-|Branches|Status   |
-|--------|---------|
-|master  |[![Build Status](https://travis-ci.com/jrjoacir/template-ruby-grape-api.svg?branch=master)](https://travis-ci.com/jrjoacir/template-ruby-grape-api)|
-|develop |[![Build Status](https://travis-ci.com/jrjoacir/template-ruby-grape-api.svg?branch=develop)](https://travis-ci.com/jrjoacir/template-ruby-grape-api)|
+|          |Master   |Develop|
+|----------|---------|-------|
+|**Status**|[![Build Status](https://travis-ci.com/jrjoacir/template-ruby-grape-api.svg?branch=master)](https://travis-ci.com/jrjoacir/template-ruby-grape-api)|[![Build Status](https://travis-ci.com/jrjoacir/template-ruby-grape-api.svg?branch=develop)](https://travis-ci.com/jrjoacir/template-ruby-grape-api)|
+
+Está documentação também está disponível em [Português do Brasil](README_pt-br.md).
 
 Purpose of this project is to offer a template for create an API in [Ruby language](https://www.ruby-lang.org) using [Grape API framework](http://www.ruby-grape.org/) inside docker container and propose a development architecture for APIs. This template has:
 
@@ -11,9 +12,9 @@ Purpose of this project is to offer a template for create an API in [Ruby langua
 - A database docker container with Postgresql 11
 - A suggestion of directory structure for construct the application and their layers
 
-In this project exist endpoint examples for **App** and **Healthcheck** resources. We believe with these examples a developer can develop his/her application, but we intend to make a step-by-step soon.
+In this project exist endpoint examples for **Project** and **Healthcheck** resources. We believe with these examples the developer can develop his/her application.
 
-We continue to improve this project according new ideas and suggestions appear, or according bugs are found.
+We will continue to improve this project according new ideas and suggestions appear, or according bugs are found.
 
 ## Dependencies
 
@@ -23,116 +24,175 @@ We continue to improve this project according new ideas and suggestions appear, 
 ## Stack
 
 - Database -> [Postgresql 11](https://www.postgresql.org/)
-- Language -> [Ruby 2.6.2](http://ruby-doc.org/core-2.6.2/)
+- Language -> [Ruby 2.6.4](http://ruby-doc.org/core-2.6.4/)
   - API Framework -> [Grape](https://github.com/ruby-grape/grape)
   - Web Server -> [Puma](http://puma.io/)
   - Database ORM -> [Sequel](https://github.com/jeremyevans/sequel)
 
+## Quick start - *See the application working*
+
+1. Build all containers:
+
+    ```bash
+    docker-compose build
+    ```
+
+2. Start container **development**:
+
+    ```bash
+    docker-compose up development
+    ```
+
+3. **Done!**
+
+    You are able to use your API acessing http://localhost:3000. Try to check healthcheck endpoint: http://localhost:3000/healthcheck.
+
 ## Development Usage
 
-### Building and Start Containers
+### The Containers
 
-This project uses two kind of docker containers: **database** and **application** container.
+This project uses four docker containers:
+- **database**: Container that provides a Postgres database with two instances: *postgres_dev* and *postgres_test*.
+- **development**: Container that executes the application. Depends on container *database*.
+- **test**: Container that executes tests and linter. Depends on container *database*.
+- **apiblueprint**: Container that executes API documentation server.
 
-The application container (calls **app_development**) connects in database container (calls **database**), this means that app container depends on database container. For start both containers you have to execute following command:
+| Services         | Depends on | Objectives                                                                            |
+|------------------|------------|---------------------------------------------------------------------------------------|
+| **database**     |            | Creates Database Postgres container / Creates postgres_dev and postgres_test databases|
+| **development**  | database   | Creates and executes application container                                            |
+| **test**         | database   | Creates application test container                                                    |
+| **apiblueprint** |            | Creates a API documentation server                                                    |
+
+### Building Containers
+
+To build all containers just execute following command:
 
 ```bash
-docker-compose up app_development
+docker-compose build
 ```
 
-In case you want to hide output docker information, you need to add *-d* parameter: ```docker-compose up -d app_development```.
+To build a only one container, execute:
+
+```bash
+docker-compose build <container-name>
+```
+
+### Starting application
+
+The application container (**development**) connects in database container (**database**), this means that development container depends on database container. For start both containers you have to execute following command:
+
+```bash
+docker-compose up development
+```
+
+In case you want to hide output docker information, you need to add *-d* parameter: ```docker-compose up -d development```.
+
+**Note:** in a first execution will be created database and its structure.
 
 **Done!**
 
 You are able to use your API acessing http://localhost:3000. Try to check healthcheck endpoint: http://localhost:3000/healthcheck.
+
+### Create data examples
+
+If you need to insert some data in development database, you can use the rake task *seeds* with the following command.
+
+```bash
+docker-compose run --rm development rake db:seeds
+```
+
+**Notes:**
+- Rake command clear all database tables before populate
 
 Some information about containers:
 - **database**
   - **Port**: 5432
   - Databases created with ```docker/database/create-multiple-postgresql-databases.sh``` file: ```postgres_test``` and ```postgres_dev```
 
-- **application**
+- **development**
   - **Port**: 3000
-  - Web Server started with ```docker/app/entrypoint.sh``` file
 
-More information about *stop*, *start*, *restart* containers and so on, read [Docker Compose Documentation](https://docs.docker.com/compose/) and [Docker Documentation](https://docs.docker.com/).
+More information about *stop*, *start*, *restart*, *run* containers and so on, read [Docker Compose Documentation](https://docs.docker.com/compose/) and [Docker Documentation](https://docs.docker.com/).
 
-### Executing Tests
+### Execute tests
 
-This project uses one more container only to executing tests. This container calls **app_test**.
-
-First, you need to create a container for tests (it also depends on database container).
+This project uses one more container only to executing tests. This container calls **test**. Create infrastructure for **test** container:
 
 ```bash
-docker-compose up app_test
+docker-compose up test
 ```
 
-This project uses [Rspec](https://relishapp.com/rspec/) Ruby gem as a test tool, so execute all tests with following command.
+Execute all tests with following command:
+
 
 ```bash
-docker-compose run --rm app_test rspec
+docker-compose run --rm test rspec
 ```
 
 For execute just one file test, you can inform a file in end of command.
 
 ```bash
-docker-compose run --rm app_test rspec spec/services/healthcheck/get_spec.rb
+docker-compose run --rm test rspec spec/services/healthcheck/get_service_spec.rb
 ```
 
-### Executing Code Analizer
+This project uses [Rspec](https://relishapp.com/rspec/) Ruby gem as a test tool.
+
+### Execute code analizer
+
+Create infrastructure for **test** container:
+
+```bash
+docker-compose up test
+```
 
 This project uses [Rubocop](https://www.rubocop.org) Ruby gem as a Code Analizer tool, so analize all code with following command.
 
 ```bash
-docker-compose exec app_development rubocop
+docker-compose run --rm test rubocop
 ```
 
 For analize just one file, you can inform a file in end of command.
 
 ```bash
-docker-compose exec app_development rubocop app/services/healthcheck/get.rb
+docker-compose run --rm test rubocop app/services/healthcheck/get_service.rb
 ```
 
-### Executing Code Coverage
+### Code coverage
 
-This project user [Simplecov](https://github.com/colszowka/simplecov) Ruby gem as Code Coverage tool, so know about this project code coverage opening file [./coverage/index.html](./coverage/index.html) after execute all tests with *Rspec* command.
+This project uses [Simplecov](https://github.com/colszowka/simplecov) Ruby gem as Code Coverage tool, so know about this project code coverage opening file [./coverage/index.html](./coverage/index.html) after execute all tests with *Rspec* command.
 
-## Rake Tasks
-
-For this project we decided to use a Ruby gem calls [Rake](https://github.com/ruby/rake) for execute some tasks.
 
 ### Database Migrations
 
 For execute database migrations:
 
 ```bash
-docker-compose exec <app-container> rake db:migrate
+docker-compose run --rm <container> rake db:migrate
 ```
 
-### Data Examples
+This command removes container.
 
-If you need to insert some data in database, you can use the rake task *seeds* with the following command.
+## API Blueprint Documentation
+
+This project uses [API Blueprint](https://apiblueprint.org) as API Documentation, so you can edit file `doc.apib` with all documentation you need. To generate HTML file for this documentation and access it by Snowboard, you can use a simple docker-compose command:
 
 ```bash
-docker-compose exec <app-container> rake db:seeds
+docker-compose up apiblueprint
 ```
 
-## Swagger Documentation (experimental)
-
-This project has a docker container to start a Swagger documentation server. This container calls **swagger** and you can start it with the following docker-compose command:
+or use the following docker command:
 
 ```bash
-docker-compose up swagger
+docker run -it --rm -p 127.0.0.1:8088:8088/tcp -v $PWD:/doc quay.io/bukalapak/snowboard http -b 0.0.0.0:8088 --playground -c config/snowboard.yml doc.apib
 ```
 
-To access Swagger documentation page, visit [http://localhost](http://localhost), inform **http://localhost:3000/v1/swagger_doc** in explore bar and press Explore to see project documentation API. Some funcionalities still don't work in this project version.
+To access API Blueprint local server documentation page, visit [http://localhost:8088](http://localhost:8088).
 
-In case you want to hide output docker information, you need to add *-d* parameter: ```docker-compose up -d swagger```.
+The `config/snowboard.yml` configuration file was created to enable interative API documentation. So, its possible to simulate an API.
 
-### About this container
-
-- **swagger**
-  - **Port**: 80
+### More information about documentation
+- [API Blueprint](https://apiblueprint.org)
 
 ## Directory Structure
 
@@ -153,7 +213,6 @@ In case you want to hide output docker information, you need to add *-d* paramet
 - **docker** -> Has docker configuration files.
   - **app** -> Contains docker configuration files for application container.
   - **database** -> Contains docker configuration files for database container.
-  - **swagger** -> Contains docker configuration files for swagger container.
 - **spec** -> Has all tests, classes and modules for support tests, factories, everything about tests. Each written test has to follow their directory structure.
   - **factories** -> Keeps every factories class (we are using [FactoryBot](https://github.com/thoughtbot/factory_bot)).
   - **endpoints** -> Contains tests for Endpoints.

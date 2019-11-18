@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
 module Errors
-  class AlreadyExist < StandardError
+  class AlreadyExist < Errors::Http
     def initialize(message = 'Resource already exist')
-      super
+      super(message, 409)
     end
   end
 end

@@ -3,7 +3,7 @@
 ENV['RACK_ENV'] ||= 'development'
 
 require 'bundler'
-Bundler.require(:default)
+Bundler.require(:default, ENV['RACK_ENV'].to_sym)
 
 namespace :db do
   desc 'Run migrations'
