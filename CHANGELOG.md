@@ -3,6 +3,14 @@ Here you can know about project evolution.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.0.1] - 2020-01-12
+### Changed
+- Added **bundle exec** ruby command in docker-compose.yml file in command keys
+- Corrected simplecov file configuration to execute require in simplecov gem
+- Corrected spec_helper file to execute require in simplecov configuration file
+- Updated README to add **bundle exec** in ruby commands
+- Updated **rack** gem (Automatic Pull Request #27)
+
 ## [2.0.0] - 2019-11-17
 ### Added
 - Container migrate just to run migrations on test and development databases
