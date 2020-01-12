@@ -55,7 +55,7 @@ GEM
     pg (1.1.4)
     puma (4.2.1)
       nio4r (~> 2.0)
-    rack (2.0.7)
+    rack (2.0.8)
     rack-accept (0.4.5)
       rack (>= 0.4)
     rack-cors (1.0.6)
