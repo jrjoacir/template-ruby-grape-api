@@ -127,13 +127,13 @@ Execute all tests with following command:
 
 
 ```bash
-docker-compose run --rm test rspec
+docker-compose run --rm test bundle exec rspec
 ```
 
 For execute just one file test, you can inform a file in end of command.
 
 ```bash
-docker-compose run --rm test rspec spec/services/healthcheck/get_service_spec.rb
+docker-compose run --rm test bundle exec rspec spec/services/healthcheck/get_service_spec.rb
 ```
 
 This project uses [Rspec](https://relishapp.com/rspec/) Ruby gem as a test tool.
@@ -149,13 +149,13 @@ docker-compose up test
 This project uses [Rubocop](https://www.rubocop.org) Ruby gem as a Code Analizer tool, so analize all code with following command.
 
 ```bash
-docker-compose run --rm test rubocop
+docker-compose run --rm test bundle exec rubocop
 ```
 
 For analize just one file, you can inform a file in end of command.
 
 ```bash
-docker-compose run --rm test rubocop app/services/healthcheck/get_service.rb
+docker-compose run --rm test bundle exec rubocop app/services/healthcheck/get_service.rb
 ```
 
 ### Code coverage
