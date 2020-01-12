@@ -23,7 +23,7 @@ services:
       - ./.env.development
     volumes:
       - .:/usr/src/app
-    command: sh -c "bundle exec rake db:migrate && bundle exec puma -p 3000"
+    command: sh -c "rake db:migrate && puma -p 3000"
 
   test:
     build:
@@ -35,7 +35,7 @@ services:
       - ./.env.test
     volumes:
       - .:/usr/src/app
-    command: sh -c "bundle exec rake db:migrate"
+    command: sh -c "rake db:migrate"
 
   apiblueprint:
     image: quay.io/bukalapak/snowboard
