@@ -1,4 +1,13 @@
-Metrics/LineLength:
+Style/HashEachMethods:
+  Enabled: true
+
+Style/HashTransformKeys:
+  Enabled: true
+
+Style/HashTransformValues:
+  Enabled: true
+
+Layout/LineLength:
   Max: 120
 
 Style/AsciiComments:
