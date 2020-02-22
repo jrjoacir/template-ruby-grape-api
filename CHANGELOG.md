@@ -7,6 +7,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ### Changed
 - Updated gems: grape, grape-entity, pg, rack-cors, rake, sequel, simplecov, byebug, database_cleaner and rubocop
 - Configure Rubocop with new cops: Style/HashEachMethods, Style/HashTransformKeys and Style/HashTransformValues, and correct Layout/LineLength
+- Set version 12.2 in postgresql database image
+- Set version 3.5.4 in apiblueprint snowboard image
 
 ## [2.0.4] - 2020-02-22
 ### Changed
