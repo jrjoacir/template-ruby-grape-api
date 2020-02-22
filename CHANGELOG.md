@@ -7,6 +7,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ### Changed
 - Updated Puma gem to 4.3 version
 - Added command to stop containers in travis configutarion
+- Increased timeout connection database from 5 to 30 seconds
 
 ## [2.0.3] - 2020-01-12
 ### Changed
