@@ -6,6 +6,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ## [2.0.4] - 2020-02-22
 ### Changed
 - Updated Puma gem to 4.3 version
+- Added command to stop containers in travis configutarion
 
 ## [2.0.3] - 2020-01-12
 ### Changed
