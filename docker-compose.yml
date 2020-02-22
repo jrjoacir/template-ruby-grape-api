@@ -1,7 +1,7 @@
 version: '3'
 services:
   database:
-    image: postgres:11-alpine
+    image: postgres:12.2-alpine
     environment:
       POSTGRES_MULTIPLE_DATABASES: postgres_dev,postgres_test
       #POSTGRES_DB: postgres
@@ -39,7 +39,7 @@ services:
     command: sh -c "rake db:migrate"
 
   apiblueprint:
-    image: quay.io/bukalapak/snowboard
+    image: quay.io/bukalapak/snowboard:v3.5.4
     command: http -b 0.0.0.0:8088 --playground -c config/snowboard.yml doc.apib
     expose:
       - "8088"
