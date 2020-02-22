@@ -3,7 +3,7 @@ Here you can know about project evolution.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## Unreleased
+## [2.1.0] - 2020-02-22
 ### Changed
 - Updated gems: grape, grape-entity, pg, rack-cors, rake, sequel, simplecov, byebug, database_cleaner and rubocop
 - Configure Rubocop with new cops: Style/HashEachMethods, Style/HashTransformKeys and Style/HashTransformValues, and correct Layout/LineLength
