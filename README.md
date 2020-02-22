@@ -9,7 +9,7 @@ Está documentação também está disponível em [Português do Brasil](README_
 Purpose of this project is to offer a template for create an API in [Ruby language](https://www.ruby-lang.org) using [Grape API framework](http://www.ruby-grape.org/) inside docker container and propose a development architecture for APIs. This template has:
 
 - An application docker container with Ruby language and their gems like Grape API Framework
-- A database docker container with Postgresql 11
+- A database docker container with Postgresql 12
 - A suggestion of directory structure for construct the application and their layers
 
 In this project exist endpoint examples for **Project** and **Healthcheck** resources. We believe with these examples the developer can develop his/her application.
@@ -23,7 +23,7 @@ We will continue to improve this project according new ideas and suggestions app
 
 ## Stack
 
-- Database -> [Postgresql 11](https://www.postgresql.org/)
+- Database -> [Postgresql 12](https://www.postgresql.org/)
 - Language -> [Ruby 2.6.4](http://ruby-doc.org/core-2.6.4/)
   - API Framework -> [Grape](https://github.com/ruby-grape/grape)
   - Web Server -> [Puma](http://puma.io/)
@@ -222,7 +222,7 @@ The `config/snowboard.yml` configuration file was created to enable interative A
 
 ## Additional information
 
-- Dockerfile for Postgresql 11 (Container Docker) got on official [Postgresql Dockerfile](https://hub.docker.com/_/postgres/)
+- Dockerfile for Postgresql 12 (Container Docker) got on official [Postgresql Dockerfile](https://hub.docker.com/_/postgres/)
 
 - Dockerfile for Ruby (Container Docker) got on official [Ruby Dockerfile](https://hub.docker.com/_/ruby/)
 
